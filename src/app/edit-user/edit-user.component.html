@@ -9,19 +9,28 @@
   <a [routerLink]="''" (click)="onLogout()"> Log out </a><br>
   <br>
   <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="email">Email address:</label>
-      <input type="email" formControlName="email" placeholder="Email" name="email" class="form-control" id="email">
+   <div class="form-group">
+      <label for="UserName">Username:</label>
+      <input type="text" formControlName="username" class="form-control" id="Username">
     </div>
 
     <div class="form-group">
-      <label for="firstName">First Name:</label>
-      <input formControlName="firstName" placeholder="First Name" name="firstName" class="form-control" id="firstName">
+      <label for="password">Password:</label>
+      <input type="password" formControlName="password" class="form-control" id="Password">
     </div>
 
     <div class="form-group">
-      <label for="lastName">Last Name:</label>
-      <input formControlName="lastName" placeholder="Last name" name="lastName" class="form-control" id="lastName">
+      <label for="title">Title:</label>
+      <input type="title" formControlName="title" class="form-control" id="Title">
+    </div>
+
+    <div class="form-group">
+      <label for="user_type">User Type</label>
+      <select formControlName="user_type" class="form-control" id="user_type" [(ngModel)]="lists[1].value">
+        <option *ngFor="let item of lists" value={{item.value}}>
+                {{item.label}}
+        </option>
+      </select>
     </div>
 
     <button class="btn btn-success">Update</button>

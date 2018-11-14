@@ -15,10 +15,15 @@ import { AuthenticationService   } from "../service/auth.service";
 export class EditUserComponent implements OnInit {
 
 //  constructor() { }
+  lists = [
+     {value: 0, label: 'client User'},
+     {value: 1, label: 'Regular User'},
+     {value: 2, label: 'Admin User'}
+  ];
   user: User;
   editForm: FormGroup;
   constructor(private formBuilder: FormBuilder,private router: Router, private userService: UserService, private authService: AuthenticationService) { }
-
+ 
   ngOnInit() {
     let userId = localStorage.getItem("editUserId");
     if(!userId) {
@@ -27,10 +32,10 @@ export class EditUserComponent implements OnInit {
       return;
     }
     this.editForm = this.formBuilder.group({
-      id: [],
-      email: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required]
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      title: ['', Validators.required],
+      user_type: ['', Validators.required]
     });
     this.userService.getUserById(userId)
       .subscribe( data => {
