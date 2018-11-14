@@ -10,7 +10,8 @@
   <table class="table table-striped">
     <thead>
     <tr>
-      <th style="visibility=hidden;">Id</th>
+
+      <th class="not-visible">Id</th>
       <th>Username</th>
       <th>Title</th>
       <th>User Type</th>
@@ -18,7 +19,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let user of users">
-      <td style="visibility:hidden;">{{user.id}}</td>
+      <td class="not-visible">{{user.id}}</td>
       <td> {{user.username}} </td>
       <td> {{user.title}} </td>
       <td> {{ user.user_type==0 ? 'client': user.user_type==1?'reg':'admin' }}  </td>
@@ -27,4 +28,5 @@
     </tr>
     </tbody>
   </table>
+
 </div>
