@@ -4,6 +4,8 @@ import {UserService} from "../service/user.service";
 import {first} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {User} from "../model/user.model";
+
+
 import { AuthenticationService   } from "../service/auth.service";
 
 
@@ -16,7 +18,17 @@ export class AddUserComponent implements OnInit {
 
   //constructor() { }
   constructor(private formBuilder: FormBuilder,private router: Router, private userService: UserService, private authService: AuthenticationService) { }
-
+  //selectedUserType:UserType = new UserType(0, 'Client User');
+  //usertypes = [
+  //   new UserType(0, 'Client User'),
+  //   new UserType(1, 'Regular User'),
+  //   new UserType(2, 'Admin User')
+  //];
+  lists = [
+     {value: 0, label: 'client User'},
+     {value: 1, label: 'Regular User'},
+     {value: 2, label: 'Admin User'}
+  ];
   user: User;
   addForm: FormGroup;
   ngOnInit() {
@@ -24,7 +36,7 @@ export class AddUserComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required],      
       title: ['', Validators.required],
-      adminAccount: [false, Validators.pattern('true')]
+      user_type: ['', Validators.required]
     });
   };
 

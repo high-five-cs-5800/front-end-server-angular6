@@ -15,6 +15,7 @@ import { ListUserComponent } from "./list-user/list-user.component";
 import { UserService } from "./service/user.service";
 import { AdminUserComponent } from './admin-user/admin-user.component';
 import { RegularUserComponent } from './regular-user/regular-user.component';
+import { ClientUserComponent } from './client-user/client-user.component';
 
 
 
@@ -26,7 +27,8 @@ import { RegularUserComponent } from './regular-user/regular-user.component';
     AddUserComponent,
     EditUserComponent,
     AdminUserComponent,
-    RegularUserComponent
+    RegularUserComponent,
+    ClientUserComponent
   ],
   imports: [
     BrowserModule,

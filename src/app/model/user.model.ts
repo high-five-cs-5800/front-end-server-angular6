@@ -3,5 +3,5 @@ export class User{
   title: string;
   password: string;
   username: string;
-  adminAccount: boolean;
+  user_type: number;
 }

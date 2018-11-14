@@ -36,10 +36,11 @@ export class LoginComponent implements OnInit {
         this.userService.getUserById(userId)
                         .subscribe( data => {
                            console.log(data);
-        		   if(data.adminAccount == true) {
+        		   if(data.user_type  == 2 ) {
                                 this.router.navigate(['admin-user']);
-                           }
-                           else{
+                           }else if(data.user_type  == 1 ) {
+                                this.router.navigate(['client-user']);
+                           }else{
                                 this.router.navigate(['regular-user']);
                           }
       			});

@@ -13,7 +13,7 @@
       <th style="visibility=hidden;">Id</th>
       <th>Username</th>
       <th>Title</th>
-      <th>is Admin? </th>
+      <th>User Type</th>
     </tr>
     </thead>
     <tbody>
@@ -21,7 +21,7 @@
       <td style="visibility:hidden;">{{user.id}}</td>
       <td> {{user.username}} </td>
       <td> {{user.title}} </td>
-      <td> {{user.adminAccount}}</td>
+      <td> {{ user.user_type==0 ? 'client': user.user_type==1?'reg':'admin' }}  </td>
       <td><button class="btn btn-danger" (click)="deleteUser(user)"> Delete</button>
         <button class="btn btn-danger" (click)="editUser(user)" style="margin-left: 20px;"> Edit</button></td>
     </tr>
