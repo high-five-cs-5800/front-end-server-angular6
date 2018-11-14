@@ -1,0 +1,30 @@
+<p>
+  list-user works!
+</p>
+<div class="col-md-6">
+  <h2> User Details</h2>
+  <br>
+  <a [routerLink]="'/admin-user'"> Admin dashboard</a><br>
+  <button class="btn btn-danger" (click)="addUser()"> Add User </button>
+  <button class="btn btn-danger" (click)="onLogout()"> Log Out </button>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th style="visibility=hidden;">Id</th>
+      <th>Username</th>
+      <th>Title</th>
+      <th>is Admin? </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td style="visibility:hidden;">{{user.id}}</td>
+      <td> {{user.username}} </td>
+      <td> {{user.title}} </td>
+      <td> {{user.adminAccount}}</td>
+      <td><button class="btn btn-danger" (click)="deleteUser(user)"> Delete</button>
+        <button class="btn btn-danger" (click)="editUser(user)" style="margin-left: 20px;"> Edit</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
