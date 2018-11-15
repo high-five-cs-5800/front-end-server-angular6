@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {workload} from "../model/workload.model";
+import {Workloads} from "../model/workload.model";
 
 @Injectable()
 export class Contacts {

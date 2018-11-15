@@ -1,3 +1,5 @@
+
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {User} from "../model/user.model";
@@ -20,7 +22,8 @@ export class UserService {
   }
 
   updateUser(user: User) {
-    return this.http.put(this.baseUrl + '/' + user.id, user);
+    let body =  { username: user.username, password: user.password, title: user.title, user_type: user.user_type } ; 
+    return this.http.put(this.baseUrl + '/update?where=' +  {id: user.id} + body);
   }
 
   deleteUser(id: string) {

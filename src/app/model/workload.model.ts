@@ -1,11 +1,11 @@
-export class Workload{
+export class Workloads {
   id: string;
   cast_type: number; 
   case_purpose: string;
   subject: string;
   product_line: string;
   archive: boolean;
-  contacts: Contact;
+  contacts: Contacts;
   keywordss: Keywords;
 
 }

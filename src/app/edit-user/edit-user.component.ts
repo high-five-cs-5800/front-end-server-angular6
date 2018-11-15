@@ -32,14 +32,16 @@ export class EditUserComponent implements OnInit {
       return;
     }
     this.editForm = this.formBuilder.group({
+      id: ['', Validators.required],
       username: ['', Validators.required],
-      password: ['', Validators.required],
       title: ['', Validators.required],
       user_type: ['', Validators.required]
     });
     this.userService.getUserById(userId)
       .subscribe( data => {
         this.editForm.setValue(data);
+       console.log("tesing");
+       console.log(data);
       });
   }
 

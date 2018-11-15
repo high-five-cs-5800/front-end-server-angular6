@@ -18,12 +18,6 @@ export class AddUserComponent implements OnInit {
 
   //constructor() { }
   constructor(private formBuilder: FormBuilder,private router: Router, private userService: UserService, private authService: AuthenticationService) { }
-  //selectedUserType:UserType = new UserType(0, 'Client User');
-  //usertypes = [
-  //   new UserType(0, 'Client User'),
-  //   new UserType(1, 'Regular User'),
-  //   new UserType(2, 'Admin User')
-  //];
   lists = [
      {value: 0, label: 'client User'},
      {value: 1, label: 'Regular User'},

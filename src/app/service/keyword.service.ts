@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-importi {workload} from "../model/workload.model";
+import {Workloads} from "../model/workload.model";
 
 @Injectable()
 export class Keyword {
@@ -10,3 +10,4 @@ export class Keyword {
   getKeyword () {
     return this.http.get<Keyword[]>(this.baseUrl);
   }
+}
