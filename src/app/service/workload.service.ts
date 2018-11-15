@@ -5,7 +5,7 @@ import {workload} from "../model/workload.model";
 @Injectable()
 export class WorkloadService {
   constructor(private http: HttpClient) { }
-  baseUrl: string = 'http://back-end-serer-env2.uyvzpgtkte.us-east-1.elasticbeanstalk.com:8081/aapi/Workloads';
+  baseUrl: string = 'http://back-end-serer-env2.uyvzpgtkte.us-east-1.elasticbeanstalk.com:8081/api/Workloads';
 
   getWorkloads () {
     return this.http.get<Workloads[]>(this.baseUrl);
