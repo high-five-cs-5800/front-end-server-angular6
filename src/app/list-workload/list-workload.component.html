@@ -1,0 +1,47 @@
+<p>
+  list-workload works!
+</p>
+<div class="col-md-6">
+  <h2> User Details</h2>
+  <br>
+  <a [routerLink]="'/admin-user'"> Admin dashboard</a><br>
+  <button class="btn btn-danger" (click)="addWorkload()"> Add Workload</button>
+  <button class="btn btn-danger" (click)="onLogout()"> Log Out </button>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+
+      <th class="not-visible">Id</th>
+      <th>Case type</th>
+      <th>Case purpose</th>
+      <th>Product line</th>
+      <th>Case detail</th>
+      <th>Case Response</th>
+      <th>Assigned to</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let workload of workloads">
+      <td class="not-visible">{{workload.id}}</td>
+      <td> {{workload.case_type}} </td>
+      <td> {{workload.case_purpose}} </td>
+      <td> {{workload.subject}}  </td>
+      <td> {{workload.product_line}}  </td>
+      <td> {{workload.case_request_detail}}  </td>
+      <td> {{workload.help_response_detail}}  </td>
+      <td> {{workload.assigned_to_who}}  </td>
+
+
+
+
+      <td><button class="btn btn-danger" (click)="deleteWorkload(workload)"> Delete</button></td>
+    
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+

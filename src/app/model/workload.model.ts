@@ -10,7 +10,10 @@ export class Workloads {
   archive: boolean;
   _contact_info: Contact[];
   _keywordList: Keyword[];
-
+  case_request_detail: string;
+  help_response_detail: string;
+  assigned_to_who: string;
+ 
 }
 
 

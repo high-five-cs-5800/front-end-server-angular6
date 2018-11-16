@@ -20,8 +20,8 @@ export class AuthenticationService {
                                 //console.log(data);
 				if(data && data.id && data.userId){
 				   console.log("testing id: " + data.userId + ", token: " + data.id);
-                                   localStorage.setItem('accessToken', data.id);
-                                   localStorage.setItem('userId', data.userId);
+                                   sessionStorage.setItem('accessToken', data.id);
+                                   sessionStorage.setItem('userId', data.userId);
                                 }
                                 else{
                                    return throwError({ error: { message: 'Username or password is incorrect' } });
@@ -31,9 +31,9 @@ export class AuthenticationService {
 
       }
       logout() { 
-        if(localStorage.getItem('accessToken')!=null){
-            this.http.post<any>(this.API_URL + '/' + 'logout?', {access_token: localStorage.getItem('accessToken')});
+        if(sessionStorage.getItem('accessToken')!=null){
+            this.http.post<any>(this.API_URL + '/' + 'logout?', {access_token: sessionStorage.getItem('accessToken')});
         }
-        localStorage.clear();
+        sessionStorage.clear();
       }
 }

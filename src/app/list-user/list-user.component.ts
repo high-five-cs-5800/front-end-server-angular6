@@ -16,14 +16,14 @@ export class ListUserComponent implements OnInit {
   //constructor() { }
   users: User[];
   constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService, private authService: AuthenticationService) { }
-  
+
   ngOnInit() {
     this.userService.getUsers()
       .subscribe( data => {
         this.users = data;
       });
   }
-  
+
   deleteUser(user: User): void {
     this.userService.deleteUser(user.id)
       .subscribe( data => {
@@ -32,8 +32,8 @@ export class ListUserComponent implements OnInit {
   };
 
   editUser(user: User): void {
-    localStorage.removeItem("editUserId");
-    localStorage.setItem("editUserId", user.id.toString());
+    sessionStorage.removeItem("editUserId");
+    sessionStorage.setItem("editUserId", user.id.toString());
     this.router.navigate(['edit-user']);
   };
 

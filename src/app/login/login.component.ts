@@ -29,10 +29,10 @@ export class LoginComponent implements OnInit {
     }
     this.authService.login(this.loginForm.controls.username.value, 
                                       this.loginForm.controls.password.value);
-    var currentUser = localStorage.getItem('accessToken');
-    localStorage.setItem("username", this.loginForm.controls.username.value);
+    var currentUser = sessionStorage.getItem('accessToken');
+    sessionStorage.setItem("username", this.loginForm.controls.username.value);
     if(currentUser != null){
-        var userId = localStorage.getItem('userId');
+        var userId = sessionStorage.getItem('userId');
         this.userService.getUserById(userId)
                         .subscribe( data => {
                            console.log(data);
@@ -52,9 +52,9 @@ export class LoginComponent implements OnInit {
     this.logouted = true;
     this.authService.logout();
     this.router.navigate(['login']);
+    this.invalidLogin = false;
   }
   ngOnInit() {
-
     this.loginForm = this.formBuilder.group( {
       username: ['', Validators.required],
       password: ['', Validators.required]

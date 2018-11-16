@@ -17,6 +17,9 @@ import { AdminUserComponent } from './admin-user/admin-user.component';
 import { RegularUserComponent } from './regular-user/regular-user.component';
 import { ClientUserComponent } from './client-user/client-user.component';
 import { AddWorkloadComponent } from './add-workload/add-workload.component';
+import { ListWorkloadComponent } from './list-workload/list-workload.component';
+import { EditWorkloadComponent } from './edit-workload/edit-workload.component';
+
 
 
 
@@ -30,7 +33,9 @@ import { AddWorkloadComponent } from './add-workload/add-workload.component';
     AdminUserComponent,
     RegularUserComponent,
     ClientUserComponent,
-    AddWorkloadComponent
+    AddWorkloadComponent,
+    ListWorkloadComponent,
+    EditWorkloadComponent
   ],
   imports: [
     BrowserModule,

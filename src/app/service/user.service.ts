@@ -38,5 +38,19 @@ export class UserService {
     return this.http.post(this.baseUrl + 'Workloads', workload);
   }
 
+  getWorkloads() {
+    return this.http.get<Workloads[]>(this.baseUrl + 'Workloads');
+  }
+
+  getWorkloadById(id: string) {
+    return this.http.get<Workloads>(this.baseUrl + 'Workloads/' + id);
+  }
+
+  deleteWorkload(id: string) {
+    return this.http.delete(this.baseUrl + 'Workloads/' + id);
+  }
+
+
+
 }
 

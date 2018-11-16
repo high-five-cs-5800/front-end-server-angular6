@@ -22,6 +22,13 @@ export class AddWorkloadComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthenticationService, private userService: UserService) { }
 
+  lists = [
+    {value: 0, label: 'type 0'},
+    {value: 1, label: 'type 1'},
+    {value: 2, label: 'type 2'}
+];
+
+
   //workload: Workloads;
   addWorkLoadForm: FormGroup;
 
@@ -33,6 +40,7 @@ export class AddWorkloadComponent implements OnInit {
          subject: new FormControl,
          product_line: new FormControl,
          archive: new FormControl,
+         case_request_detail: new FormControl,
          _keywordList: new FormArray([
             this.initKeywordList()
          ]),
@@ -89,11 +97,6 @@ export class AddWorkloadComponent implements OnInit {
           .subscribe( data => {
               this.router.navigate(['client-user']);
            });
-      //this.wService.createWorkload(this.addWorkLoadForm.value)
-      //.subscribe( data => {
-      //  console.log(data);
-      //  this.router.navigate(['client-user']);
-      //});
- }
+  }
 
 }
