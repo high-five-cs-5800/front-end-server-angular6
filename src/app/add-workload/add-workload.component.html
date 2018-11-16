@@ -1,0 +1,117 @@
+<p>
+  add-workload works!
+</p>
+
+  <a [routerLink]="''" (click)="onLogout()"> Log out </a><br>
+  <a [routerLink]="'/client-user'">Client Dashboard</a><br>
+  
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="margin-20">
+        <h4>Add Workload</h4>
+      </div>
+<form [formGroup]="addWorkLoadForm" novalidate (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label>Case Type</label>
+          <input type="text" class="form-control" formControlName="case_type">
+          <small *ngIf="!addWorkLoadForm.controls.case_type.valid" class="text-danger">case type is required </small>
+        </div>
+	<div class="form-group">
+          <label>Case Purpose</label>
+          <input type="text" class="form-control" formControlName="case_purpose">
+          <small *ngIf="!addWorkLoadForm.controls.case_purpose.valid" class="text-danger">case purpose  is required </small>
+        </div>
+	<div class="form-group">
+          <label>Subject</label>
+          <input type="text" class="form-control" formControlName="subject">
+          <small *ngIf="!addWorkLoadForm.controls.subject.valid" class="text-danger">Subject is required </small>
+        </div>
+	<div class="form-group">
+          <label>Product Line</label>
+          <input type="text" class="form-control" formControlName="product_line">
+          <small *ngIf="!addWorkLoadForm.controls.product_line.valid" class="text-danger">Product line is required </small>
+        </div>
+	<div class="form-group">
+          <label>Archive</label>
+          <input type='checkbox' formControlName='archive' >
+        </div>
+
+        <!--keyword-->
+
+
+        <div formArrayName="_keywordList">
+          <div *ngFor="let keyword of addWorkLoadForm.controls._keywordList['controls']; let i=index" class="panel panel-default">
+            <div class="panel-heading">
+              <span>Keyword count: {{i + 1}}</span>
+              <span class="glyphicon glyphicon-remove pull-right" *ngIf="addWorkLoadForm.controls._keywordList.controls.length > 1" (click)="removeKeyword(i)"></span>
+            </div>
+            <div class="panel-body" [formGroupName]="i">
+              <div class="form-group col-xs-6">
+                <label>Keyword</label>
+                <input type="text" class="form-control" formControlName="word">
+                <small [hidden]="addWorkLoadForm.controls._keywordList.controls[i].controls.word.valid" class="text-danger">
+                    Keyword is required
+                </small>
+              </div>
+              <div class="form-group col-xs-6">
+ 
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="margin-20">
+          <a (click)="addKeyword()" style="cursor: default">Add another keyword + </a>
+        </div>
+
+        <!-- contact -->
+       <fieldset formGroupName="_contact_info">
+	<div class="form-group">
+          <label>First</label>
+          <input type="text" class="form-control" formControlName="First" required>
+        </div>
+        <div class="form-group">
+          <label>Last</label>
+          <input type="text" class="form-control" formControlName="Last" required>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="text" class="form-control" formControlName="email" required>
+        </div>
+        <div class="form-group">
+          <label>Company Name</label>
+          <input type="text" class="form-control" formControlName="company" required>
+        </div>
+        <div class="form-group">
+          <label>Phone number</label>
+          <input type="text" class="form-control" formControlName="phone_number" required>
+        </div>
+        </fieldset>
+
+
+
+
+
+
+
+
+
+	<div class="margin-20">
+          <button type="submit" class="btn btn-primary pull-right" [disabled]="!addWorkLoadForm.valid">Submit</button>
+        </div>
+	<div class="clearfix"></div>
+
+
+        <div class="margin-20">
+          <div>myForm details:-</div>
+          <pre>Is myForm valid?: <br>{{addWorkLoadForm.valid | json}}</pre>
+          <pre>form value:	 <br>{{addWorkLoadForm.value | json}}</pre>
+        </div>
+</form>
+
+  
+
+    </div>
+  </div>
+</div>
+ 

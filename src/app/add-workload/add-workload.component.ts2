@@ -1,0 +1,79 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
+
+import { WorkloadService } from "../service/workload.service";
+import { AuthenticationService   } from "../service/auth.service";
+
+import { first} from "rxjs/operators";
+import { Router} from "@angular/router";
+import { Workloads } from "../model/workload.model";
+import { Keyword } from "../model/keyword.model";
+import { Contact } from "../model/contact.model";
+
+
+
+
+@Component({
+  selector: 'app-add-workload',
+  templateUrl: './add-workload.component.html',
+  styleUrls: ['./add-workload.component.css']
+})
+
+export class AddWorkloadComponent implements OnInit {
+
+  constructor(private formBuilder: FormBuilder,private router: Router, private workloadService: WorkloadService,private authService: AuthenticationService) { }
+
+  workload: Workloads;
+  addWorkLoadForm: FormGroup;
+
+  ngOnInit() {
+    this.addWorkLoadForm = this.formBuilder.group(
+      {
+         cast_type: ['', Validators.required],
+         case_purpose: ['', Validators.required],
+	 subject: ['', Validators.required],
+	 product_line: ['', Validators.required],
+         archive: ['', Validators.required],
+         _keywordList: this.formBuilder.array([
+            this.initKeywordList()
+         ])
+         //_contact_info: initContact_infor()
+      }
+    );
+  }
+
+  initKeywordList(){
+	return this.formBuilder.group({
+           word: ["", Validators.required]
+        });
+  }
+
+  addKeyword(){
+        const control = <FormArray>this.addWorkLoadForm.controls['_keywordList'];
+        control.push(this.initKeywordList());
+  }
+
+  removeKeyword(i: number) {
+        const control = <FormArray>this.addWorkLoadForm.controls['_keywordList'];
+        control.removeAt(i);
+  }
+
+  initContact_info(){
+       return this.formBuilder.group({
+          First: ['', Validators.required],
+          Last: ['', Validators.required],
+          email: ['', Validators.required],
+          company: ['', Validators.required],
+          phone_number: ['', Validators.required]
+       });
+  }
+  onSubmit(){
+    
+  }
+
+  onLogout(){
+    this.authService.logout();
+    this.router.navigate(['login']);
+  }
+
+}

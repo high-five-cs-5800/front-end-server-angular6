@@ -16,6 +16,7 @@ import { UserService } from "./service/user.service";
 import { AdminUserComponent } from './admin-user/admin-user.component';
 import { RegularUserComponent } from './regular-user/regular-user.component';
 import { ClientUserComponent } from './client-user/client-user.component';
+import { AddWorkloadComponent } from './add-workload/add-workload.component';
 
 
 
@@ -28,7 +29,8 @@ import { ClientUserComponent } from './client-user/client-user.component';
     EditUserComponent,
     AdminUserComponent,
     RegularUserComponent,
-    ClientUserComponent
+    ClientUserComponent,
+    AddWorkloadComponent
   ],
   imports: [
     BrowserModule,

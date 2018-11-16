@@ -1,0 +1,55 @@
+<p>
+  add-workload works!
+</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+ <div class="margin-20"><h4>Add Workload</h4></div>
+<form [formGroup]="addWorkLoadForm" novalidate (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label>Case Type</label>
+          <input type="text" class="form-control" formControlName="case_type">
+          <small *ngIf="!addWorkLoadForm.controls.case_type.valid" class="text-danger">Name is required (minimum 5 characters).</small>
+        </div>
+        <div class="form-group">
+          <label>Case Purpose</label>
+          <input type="text" class="form-control" formControlName="case_purpose">
+          <small *ngIf="!addWorkLoadForm.controls.case_purpose.valid" class="text-danger">Name is required (minimum 5 characters).</small>
+        </div>
+        <div class="form-group">
+          <label>Case Purpose</label>
+          <input type="text" class="form-control" formControlName="subject">
+          <small *ngIf="!addWorkLoadForm.controls.subject.valid" class="text-danger">Name is required (minimum 5 characters).</small>
+        </div>
+        <div class="form-group">
+          <label>Case Purpose</label>
+          <input type="text" class="form-control" formControlName="product_line">
+          <small *ngIf="!addWorkLoadForm.controls.product_line.valid" class="text-danger">Name is required (minimum 5 characters).</small>
+        </div>
+	<div class="form-group">
+          <label>Archive</label>
+          <input type='checkbox' formControlName='archive' >
+        </div>
+
+        <!--addresses-->
+        
+
+        <div class="margin-20">
+          <a (click)="addKeyword()" style="cursor: default">Add another keyword + </a>
+        </div>
+        <div class="margin-20">
+          <button type="submit" class="btn btn-primary pull-right" [disabled]="!addWorkLoadForm.valid">Submit</button>
+        </div>
+        <div class="clearfix"></div>
+        <div class="margin-20"></div>
+
+
+        <div class="margin-20">
+          <div>myForm details:-</div>
+          <pre>Is myForm valid?: <br>{{addWorkLoadForm.valid | json}}</pre>
+          <pre>form value:       <br>{{addWorkLoadForm.value | json}}</pre>
+        </div>
+</form>
+    </div>
+  </div>
+</div>
