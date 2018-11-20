@@ -30,7 +30,7 @@ export class ManageRegularUserWorkloadComponent implements OnInit {
     //let temp = { username: string, title: string, user_type: number, id:string }
     var userId = "";
     JSON.parse(currentUser, (key,value)=>{
-    	if(key === 'id')
+    	if(key === 'userId')
            userId = value;
     } );
 
