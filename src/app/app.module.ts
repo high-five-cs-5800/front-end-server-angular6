@@ -7,19 +7,23 @@ import { AppComponent } from './app.component';
 
 import { LoginComponent } from './login/login.component';
 import { AuthenticationService } from "./service/auth.service";
-//import { ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+
+import { HttpClientModule, HttpClientJsonpModule } from "@angular/common/http";
 import { AddUserComponent } from './add-user/add-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { ListUserComponent } from "./list-user/list-user.component";
 import { UserService } from "./service/user.service";
+
 import { AdminUserComponent } from './admin-user/admin-user.component';
 import { RegularUserComponent } from './regular-user/regular-user.component';
 import { ClientUserComponent } from './client-user/client-user.component';
+
 import { AddWorkloadComponent } from './add-workload/add-workload.component';
 import { ListWorkloadComponent } from './list-workload/list-workload.component';
 import { EditWorkloadComponent } from './edit-workload/edit-workload.component';
-
+import { ConfigComponent } from './config/config.component';
+import { ManageRegularUserWorkloadComponent } from './manage-regular-user-workload/manage-regular-user-workload.component';
+//import { CustExtBrowserXhr } from "./cust-ext-browser-xhr";
 
 
 
@@ -30,22 +34,27 @@ import { EditWorkloadComponent } from './edit-workload/edit-workload.component';
     ListUserComponent,
     AddUserComponent,
     EditUserComponent,
+
     AdminUserComponent,
     RegularUserComponent,
     ClientUserComponent,
+
     AddWorkloadComponent,
     ListWorkloadComponent,
-    EditWorkloadComponent
+    EditWorkloadComponent,
+    ConfigComponent,
+    ManageRegularUserWorkloadComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    HttpClientJsonpModule,
     FormsModule,
     ReactiveFormsModule
   ],
   providers: [
-    AuthenticationService, UserService
+    AuthenticationService, UserService, 
   ],
   bootstrap: [AppComponent]
 })

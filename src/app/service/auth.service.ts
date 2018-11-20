@@ -4,31 +4,26 @@ import { Observable, of, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from  "../model/user.model";
 
+
 @Injectable()
 
 export class AuthenticationService {
       API_URL = "http://back-end-serer-env2.uyvzpgtkte.us-east-1.elasticbeanstalk.com:8081/api/UserAccounts";
 
       constructor(private http: HttpClient) { }
-
+      token: string;
       login(username: string, password: string) {
+         return this.http.post<any>(this.API_URL + '/' + 'login', {username: username, password: password})
+                .pipe(map(user => {
+                // login successful if there's a jwt token in the response
+                if (user && user.id) {
+                    // store user details and jwt token in local storage to keep user logged in between page refreshes
+                    sessionStorage.setItem('currentUser', JSON.stringify(user));
+                    //sessionStorage.setItem("s", user);
+                }
 
-         //console.log("in login " + username);
-         //console.log("in login " + password);
-         this.http.post<any>(this.API_URL + '/' + 'login', {username: username, password: password})
-                  .subscribe(data => {
-                                //console.log(data);
-				if(data && data.id && data.userId){
-				   console.log("testing id: " + data.userId + ", token: " + data.id);
-                                   sessionStorage.setItem('accessToken', data.id);
-                                   sessionStorage.setItem('userId', data.userId);
-                                }
-                                else{
-                                   return throwError({ error: { message: 'Username or password is incorrect' } });
- 				}
-                             }
-                    );
-
+                return user;
+        }));
       }
       logout() { 
         if(sessionStorage.getItem('accessToken')!=null){

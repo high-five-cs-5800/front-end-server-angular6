@@ -17,6 +17,7 @@ import { AuthenticationService   } from "../service/auth.service";
 export class AddUserComponent implements OnInit {
 
   //constructor() { }
+  submitted = false;
   constructor(private formBuilder: FormBuilder,private router: Router, private userService: UserService, private authService: AuthenticationService) { }
   lists = [
      {value: 0, label: 'client User'},
@@ -34,7 +35,14 @@ export class AddUserComponent implements OnInit {
     });
   };
 
+  // convenience getter for easy access to form fields
+  get f() { return this.addForm.controls; }
+
   onSubmit(){
+    this.submitted = true;
+    if(this.addForm.invalid){
+        return ;
+    }
     this.userService.createUser(this.addForm.value)
       .subscribe( data => {
         this.router.navigate(['list-user']);

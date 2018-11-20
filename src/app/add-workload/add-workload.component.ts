@@ -75,7 +75,7 @@ export class AddWorkloadComponent implements OnInit {
 
   initKeywordList(){
         return this.formBuilder.group({
-           word: ["", Validators.required]
+           word: [""]
         });
   }
 
@@ -95,7 +95,13 @@ export class AddWorkloadComponent implements OnInit {
       console.log("fired submit");
       this.userService.createWorkload(this.addWorkLoadForm.value)
           .subscribe( data => {
-              this.router.navigate(['client-user']);
+              let user_type = sessionStorage.getItem('user_type');
+              console.log("testing: " + user_type);
+              if(user_type  == "2" ) {
+                   this.router.navigate(['list-workload']);
+              }else{
+		   this.router.navigate(['client-user']);
+              }
            });
   }
 

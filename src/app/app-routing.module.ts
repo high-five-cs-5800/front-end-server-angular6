@@ -13,6 +13,8 @@ import { AdminUserComponent } from "./admin-user/admin-user.component";
 import { RegularUserComponent} from "./regular-user/regular-user.component"; 
 import { ClientUserComponent } from "./client-user/client-user.component"; 
 
+import { ManageRegularUserWorkloadComponent } from './manage-regular-user-workload/manage-regular-user-workload.component';
+
 
 
 
@@ -29,6 +31,8 @@ const routes: Routes = [
   { path: 'admin-user', component: AdminUserComponent },
   { path: 'regular-user', component: RegularUserComponent },
   { path: 'client-user', component: ClientUserComponent },
+
+  { path: 'manage-regular-user-workload', component: ManageRegularUserWorkloadComponent },
 
   { path : '', component : LoginComponent }
 ];

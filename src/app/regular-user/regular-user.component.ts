@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService   } from "../service/auth.service";
+import { Router } from "@angular/router";
+
+
+
 
 @Component({
   selector: 'app-regular-user',
@@ -7,9 +12,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegularUserComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
   }
 
+  onLogout(){
+    this.authService.logout();
+    this.router.navigate(['login']);
+  }
+  
+  onManageWorkload(){
+    this.router.navigate(['manage-regular-user-workload']);
+  }
+
+  onDashBoard(){
+    this.router.navigate(['regular-user']);
+
+  }
 }

@@ -1,17 +1,28 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { User}        from "../model/user.model";
 import { Workloads }  from "../model/workload.model";
 import { Contact }  from "../model/contact.model";
 import { Keyword }  from "../model/keyword.model";
 
+ const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Accept': 'application/json',
+        'access-control-allow-origin': '*',
+        'access-control-allow-credentials': 'true'
+      })
+  };
 
 
 @Injectable()
 export class UserService {
   constructor(private http: HttpClient) { }
-  baseUrl: string = 'http://back-end-serer-env2.uyvzpgtkte.us-east-1.elasticbeanstalk.com:8081/api/';
 
+  baseUrl: string = 'http://back-end-serer-env2.uyvzpgtkte.us-east-1.elasticbeanstalk.com:8081/api/';
+  testfile: string;
+  configUrl = 'assets/config.json';
+  us
   getUsers() {
     return this.http.get<User[]>(this.baseUrl + 'UserAccounts');
   }
@@ -25,9 +36,15 @@ export class UserService {
   }
 
   updateUser(user: User) {
-    //let body = { username: user.username, password: user.password, title: user.title, user_type: user.user_type };
-    return this.http.put(this.baseUrl + 'UserAccounts' + '/update?where=', user);
-    //return this.http.put(this.baseUrl + '/update?where=' + {id: user.id} +  body);
+    //user.id = "";
+    //const options =  { responseType: 'text' as 'text', withCredentials: true };
+    //u = { username: user.username, title: user.title, user_type: user.user_type };
+    //User.prototype$updateAttributes({ id: user.id }, { username: user.username }, {title: user.title }, { user_type: user.user_type });
+    //delete user.id
+    //return this.http.put(this.baseUrl + 'UserAccounts/' + idK, { username: user.username, title: user.title, user_type: user.user_type }, httpOptions);
+    
+    return this.http.post(this.baseUrl + 'UserAccounts/update?where[id]=' + user.id, { username: user.username, title: user.title, user_type: user.user_type }, httpOptions);
+
   }
 
   deleteUser(id: string) {
@@ -41,7 +58,7 @@ export class UserService {
   getWorkloads() {
     return this.http.get<Workloads[]>(this.baseUrl + 'Workloads');
   }
-
+  
   getWorkloadById(id: string) {
     return this.http.get<Workloads>(this.baseUrl + 'Workloads/' + id);
   }
@@ -50,7 +67,27 @@ export class UserService {
     return this.http.delete(this.baseUrl + 'Workloads/' + id);
   }
 
+  updateWorkload(workload: Workloads){
+    return this.http.post(this.baseUrl + 'Workloads/update?where[id]=' + workload.id, { 
+                                                                                        case_type: workload.case_type, 
+                                                                                        case_purpose: workload.case_purpose,
+                                                                                        subject: workload.subject,
+                                                                                        product_line: workload.product_line,
+                                                                                        archive: workload.archive,
+                                                                                        case_request_detail: workload.case_request_detail,
+                                                                                        help_response_detail: workload.help_response_detail,
+                                                                                        id: workload.id,
+                                                                                        userAccountId: workload.userAccountId,
+                                                                                        _keywordList: workload._keywordList,
+                                                                                        _contact_info: workload._contact_info
+                                                                                      }
+                          , httpOptions);
+  }
 
-
+  getUserWorkload(id: string){
+    console.log("testing: " + id);
+    return this.http.post(this.baseUrl + 'UserAccounts/' + id +'/' + id, httpOptions);
+  }
+ 
+ 
 }
-

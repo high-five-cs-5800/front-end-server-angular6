@@ -21,6 +21,7 @@ export class EditUserComponent implements OnInit {
      {value: 2, label: 'Admin User'}
   ];
   user: User;
+  //userTemp: User;
   editForm: FormGroup;
   constructor(private formBuilder: FormBuilder,private router: Router, private userService: UserService, private authService: AuthenticationService) { }
  
@@ -39,22 +40,26 @@ export class EditUserComponent implements OnInit {
     });
     this.userService.getUserById(userId)
       .subscribe( data => {
-        this.editForm.setValue(data);
-       console.log("tesing");
-       console.log(data);
-      });
+         this.editForm.setValue(data);
+    });
   }
 
   onSubmit() {
+    //this.userTemp.id = this.editForm.form-control.id.value;
+    //this.userTemp.title = this.editForm.form-control.title.value;
+    //this.userTemp.password = this.editForm.form-control['password'].value;
+    //this.userTemp.user_type = this.editForm.user_type.value;
+
     this.userService.updateUser(this.editForm.value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.router.navigate(['list-user']);
-        },
-        error => {
-          alert(error);
-        });
+                    .subscribe(
+                        
+   			data => {
+                        console.log("we are here");
+                        console.log(data);
+          		this.router.navigate(['list-user']);
+                     }
+                    );
+    
   }
 
   onLogout(){

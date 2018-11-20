@@ -11,17 +11,26 @@
   <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="UserName">Username:</label>
-      <input type="text" formControlName="username" class="form-control" id="Username">
+      <input type="text" formControlName="username" class="form-control" id="Username" >
+      <div *ngIf="submitted  && f.username.errors" class="invalid-feedback">
+           <div *ngIf="f.username.errors.required">username is required</div>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="password">Password:</label>
-      <input type="password" formControlName="password" class="form-control" id="Password">
+      <input type="password" formControlName="password" class="form-control" id="Password" >
+      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+           <div *ngIf="f.password.errors.required">password is required</div>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="title">Title:</label>
       <input type="title" formControlName="title" class="form-control" id="Title">
+      <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+           <div *ngIf="f.title.errors.required">title is required</div>
+      </div>
     </div>
 
     <div class="form-group">

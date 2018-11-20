@@ -3,7 +3,9 @@
 </p>
 
   <a [routerLink]="''" (click)="onLogout()"> Log out </a><br>
+  <a [routerLink]="'/list-workload'">Manage Workload</a><br>
   <a [routerLink]="'/client-user'">Client Dashboard</a><br>
+ 
   
 <div class="container">
   <div class="row">
@@ -14,7 +16,7 @@
 <form [formGroup]="addWorkLoadForm" novalidate (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="case_type">Case Type</label>
-          <select formControlName="case_type" class="form-control" id="cast_type" [(ngModel)]="lists[1].value">
+          <select formControlName="case_type" class="form-control" id="case_type" [(ngModel)]="lists[1].value">
              <option *ngFor="let item of lists" value={{item.value}}>
                {{item.label}}
              </option>
@@ -48,28 +50,25 @@
         <!--keyword-->
 
 
-        <div formArrayName="_keywordList">
-          <div *ngFor="let keyword of addWorkLoadForm.controls._keywordList['controls']; let i=index" class="panel panel-default">
-            <div class="not-visible">
-              <span>Keyword count: {{i + 1}}</span>
-              <a *ngIf="addWorkLoadForm.controls._keywordList.controls.length > 1" (click)="removeKeyword(i)">Remove keyword </a>
+        <div formArrayName="_keywordList" hidden>
+          <div *ngFor="let keyword of addWorkLoadForm.controls._keywordList['controls']; let i=index" class="panel panel-default" hidden>
+            <div hidden>
+              <span hidden>Keyword count: {{i + 1}}</span>
+              <a *ngIf="addWorkLoadForm.controls._keywordList.controls.length > 1" (click)="removeKeyword(i)" hidden>Remove keyword </a>
             </div>
-            <div class="panel-body" [formGroupName]="i">
-              <div class="form-group col-xs-6">
-                <label>Keyword</label>
+            <div hidden [formGroupName]="i">
+              <div class="form-group col-xs-6" hidden>
+                <label hideen>Keyword</label>
                 <input type="hidden" class="form-control" formControlName="word">
-                <small [hidden]="addWorkLoadForm.controls._keywordList.controls[i].controls.word.valid" class="text-danger">
-                    Keyword is not required
-                </small>
               </div>
-              <div class="form-group col-xs-6">
+              <div class="form-group col-xs-6" hidden>
  
               </div>
             </div>
           </div>
         </div>
-        <div class="not-visible">
-          <a (click)="addKeyword()" style="cursor: default">Add another keyword + </a>
+        <div hidden>
+          <a (click)="addKeyword()" style="cursor: default" hidden>Add another keyword + </a>
         </div>
 
         <!-- contact -->

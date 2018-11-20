@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   submitted: boolean = false;
   logouted:  boolean = false;
   invalidLogin: boolean = false;
+  token: string;
   constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthenticationService, private userService: UserService ) { }
   user: User;
   onSubmit() {
@@ -27,27 +28,32 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
+
     this.authService.login(this.loginForm.controls.username.value, 
-                                      this.loginForm.controls.password.value);
-    var currentUser = sessionStorage.getItem('accessToken');
-    sessionStorage.setItem("username", this.loginForm.controls.username.value);
-    if(currentUser != null){
-        var userId = sessionStorage.getItem('userId');
-        this.userService.getUserById(userId)
+                          this.loginForm.controls.password.value)
+        .pipe(first())
+            .subscribe(
+                login => {
+                    //this.router.navigate([this.returnUrl]);
+                    this.userService.getUserById(login.userId)
                         .subscribe( data => {
-                           console.log(data);
-        		   if(data.user_type  === 2 ) {
+                          console.log(data);
+                          sessionStorage.setItem('user_type', data.user_type.toString()); 
+        		   if(data.user_type  == 2 ) {
                                 this.router.navigate(['admin-user']);
-                           }else if(data.user_type  === 0 ) {
-                                this.router.navigate(['client-user']);
-                           }else if(data.user_type === 1){
+                           }else if(data.user_type  == 1 ) {
                                 this.router.navigate(['regular-user']);
+                           }else{
+                                this.router.navigate(['client-user']);
                           }
-      			});
-    }else{
-      this.invalidLogin = true;
-    }
-  }
+                      });
+                },
+                error => {
+
+                    this.invalidLogin = true;
+        });
+ };
+
   onLogout(){
     this.logouted = true;
     this.authService.logout();

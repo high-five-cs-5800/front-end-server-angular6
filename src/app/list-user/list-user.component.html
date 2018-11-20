@@ -23,8 +23,10 @@
       <td> {{user.username}} </td>
       <td> {{user.title}} </td>
       <td> {{ user.user_type==0 ? 'client': user.user_type==1?'reg':'admin' }}  </td>
-      <td><button class="btn btn-danger" (click)="deleteUser(user)"> Delete</button>
-        <button class="btn btn-danger" (click)="editUser(user)" style="margin-left: 20px;"> Edit</button></td>
+      <td>
+        <button class="btn btn-danger" (click)="deleteUser(user)"> Delete</button>
+        <button class="btn btn-danger" (click)="editUser(user)" style="margin-left: 20px;"> Edit</button>
+      </td>
     </tr>
     </tbody>
   </table>

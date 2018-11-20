@@ -2,7 +2,7 @@
   list-workload works!
 </p>
 <div class="col-md-6">
-  <h2> User Details</h2>
+  <h2> Case Details</h2>
   <br>
   <a [routerLink]="'/admin-user'"> Admin dashboard</a><br>
   <button class="btn btn-danger" (click)="addWorkload()"> Add Workload</button>
@@ -33,11 +33,10 @@
       <td> {{workload.case_request_detail}}  </td>
       <td> {{workload.help_response_detail}}  </td>
       <td> {{workload.assigned_to_who}}  </td>
-
-
-
-
-      <td><button class="btn btn-danger" (click)="deleteWorkload(workload)"> Delete</button></td>
+      <td>
+          <button class="btn btn-danger" (click)="deleteWorkload(workload)"> Delete</button>
+          <button class="btn btn-danger" (click)="editWorkload(workload)" style="margin-left: 20px;"> Edit</button>
+      </td>
     
     </tr>
     </tbody>
