@@ -1,53 +1,52 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl, ReactiveFormsModule } from "@angular/forms";
 
-import { AuthenticationService } from "../service/auth.service";
+import { AuthenticationService   } from "../service/auth.service";
 import { UserService } from "../service/user.service";
 
-
 import { first} from "rxjs/operators";
-import { Router} from "@angular/router";
+import { Router } from "@angular/router";
 import { Workloads } from "../model/workload.model";
 
 
 @Component({
-  selector: 'app-edit-workload',
-  templateUrl: './edit-workload.component.html',
-  styleUrls: ['./edit-workload.component.css']
+  selector: 'app-edit-regular-user-workload',
+  templateUrl: './edit-regular-user-workload.component.html',
+  styleUrls: ['./edit-regular-user-workload.component.css']
 })
-export class EditWorkloadComponent implements OnInit {
+export class EditRegularUserWorkloadComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthenticationService, private userService: UserService) { }
-
+  userId: string;
   lists = [
     {value: 0, label: 'type 0'},
     {value: 1, label: 'type 1'},
     {value: 2, label: 'type 2'}
   ];
- 
+
   editWorkLoadForm: FormGroup;
 
-
+  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthenticationService, private userService: UserService) { }
 
   ngOnInit() {
+     let workloadId = sessionStorage.getItem("editWorkloadId");
+     sessionStorage.removeItem("editWorkloadId");
+     if(!workloadId){
+     	alert("Invalid action.")
+        this.router.navigate(['list-workload']);
+        return;
+     }
 
-   let workloadId = sessionStorage.getItem("editWorkloadId");
-   sessionStorage.removeItem("editWorkloadId");
-   if(!workloadId){
-     alert("Invalid action.")
-      this.router.navigate(['list-workload']);
-      return;
-   }
-
-   this.editWorkLoadForm = new FormGroup(
-      {
-         id: new FormControl(),
-       	 case_type: new FormControl(),
+     this.editWorkLoadForm = new FormGroup(
+       {
+       	 id: new FormControl(),
+         userAccountId: new FormControl(),
+         case_type: new FormControl(),
          case_purpose: new FormControl(),
          subject: new FormControl,
          product_line: new FormControl,
          archive: new FormControl,
          case_request_detail: new FormControl,
+ 	 help_response_detail: new FormControl,
          _keywordList: new FormArray([
             this.initKeywordList()
          ]),
@@ -58,18 +57,30 @@ export class EditWorkloadComponent implements OnInit {
                company: new FormControl(),
                phone_number: new FormControl()
           })
+          //_contact_info =  this.initContact_info()
       }
-   )
-   this.userService.getWorkloadById(workloadId)
-     .subscribe( data => {
-         this.editWorkLoadForm.setValue(data);
+     )
+     this.userService.getWorkloadById(workloadId).subscribe( data => { 
+        if(data.help_response_detail ==  "" || data.help_response_detail == null) 
+            data.help_response_detail = ""; 
+        this.editWorkLoadForm.setValue(data);
      });
+
+  }
+
+  onManageWorkload(){
+    this.router.navigate(['manage-regular-user-workload']);
+  }
+
+  onDashBoard(){
+    this.router.navigate(['regular-user']);
+
   }
 
   onLogout(){
     this.authService.logout();
     this.router.navigate(['login']);
-  }
+  };
 
   addKeyword(){
         const control = <FormArray>this.editWorkLoadForm.controls['_keywordList'];
@@ -100,12 +111,9 @@ export class EditWorkloadComponent implements OnInit {
        });
   }
   onSubmit(){
-          this.userService.updateWorkload(this.editWorkLoadForm.value)
-                    .subscribe(
-                        data => {
-                        this.router.navigate(['list-workload']);
-                     }
-                    );
+          this.userService.updateWorkload(this.editWorkLoadForm.value).subscribe( 
+               data => { this.router.navigate(['manage-regular-user-workload']); }
+           );
 
   }
 

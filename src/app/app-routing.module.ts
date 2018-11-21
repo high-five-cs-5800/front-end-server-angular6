@@ -14,25 +14,27 @@ import { RegularUserComponent} from "./regular-user/regular-user.component";
 import { ClientUserComponent } from "./client-user/client-user.component"; 
 
 import { ManageRegularUserWorkloadComponent } from './manage-regular-user-workload/manage-regular-user-workload.component';
+import { EditRegularUserWorkloadComponent } from './edit-regular-user-workload/edit-regular-user-workload.component';
 
 
 
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'add-user', component: AddUserComponent },
-  { path: 'list-user', component: ListUserComponent },
-  { path: 'edit-user', component: EditUserComponent },
+  { path: 'login', 			  component: LoginComponent },
+  { path: 'add-user',                     component: AddUserComponent },
+  { path: 'list-user',                    component: ListUserComponent },
+  { path: 'edit-user',                    component: EditUserComponent },
  
-  { path: 'add-workload', component: AddWorkloadComponent },
-  { path: 'edit-workload', component: EditWorkloadComponent },
-  { path: 'list-workload', component: ListWorkloadComponent },
+  { path: 'add-workload',                 component: AddWorkloadComponent },
+  { path: 'edit-workload',                component: EditWorkloadComponent },
+  { path: 'list-workload',                component: ListWorkloadComponent },
 
-  { path: 'admin-user', component: AdminUserComponent },
-  { path: 'regular-user', component: RegularUserComponent },
-  { path: 'client-user', component: ClientUserComponent },
+  { path: 'admin-user',                   component: AdminUserComponent },
+  { path: 'regular-user',                 component: RegularUserComponent },
+  { path: 'client-user',                  component: ClientUserComponent },
 
   { path: 'manage-regular-user-workload', component: ManageRegularUserWorkloadComponent },
+  { path: 'edit-regular-user-workload',   component: EditRegularUserWorkloadComponent },
 
   { path : '', component : LoginComponent }
 ];

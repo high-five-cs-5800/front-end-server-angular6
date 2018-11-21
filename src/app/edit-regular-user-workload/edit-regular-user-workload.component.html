@@ -1,0 +1,121 @@
+<p>
+  edit-regular-user-workload works!
+</p>
+<a [routerLink]="''" (click)="onLogout()"> Log out </a><br>
+<a [routerLink]="''" (click)="onManageWorkload()"> Manage Workload </a><br>
+<a [routerLink]="''" (click)="onDashBoard()">User Dashboard </a><br>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="margin-20">
+        <h4>Edit Workload</h4>
+      </div>
+	<form [formGroup]="editWorkLoadForm" novalidate (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label>Id </label>
+          <input type="text" class="form-control" formControlName="id">
+        </div>
+        <div class="form-group">
+          <label>User Id </label>
+          <input type="text" class="form-control" formControlName="userAccountId">
+        </div>
+        <div class="form-group">
+          <label for="case_type">Case Type</label>
+          <select formControlName="case_type" class="form-control" id="case_type" [(ngModel)]="lists[1].value">
+             <option *ngFor="let item of lists" value={{item.value}}>
+               {{item.label}}
+             </option>
+           </select>
+        </div>
+        <div class="form-group">
+          <label>Case Purpose</label>
+          <input type="text" class="form-control" formControlName="case_purpose">
+          <small *ngIf="!editWorkLoadForm.controls.case_purpose.valid" class="text-danger">case purpose  is required </small>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" class="form-control" formControlName="subject">
+          <small *ngIf="!editWorkLoadForm.controls.subject.valid" class="text-danger">Subject is required </small>
+        </div>
+        <div class="form-group">
+          <label>Product Line</label>
+          <input type="text" class="form-control" formControlName="product_line">
+          <small *ngIf="!editWorkLoadForm.controls.product_line.valid" class="text-danger">Product line is required </small>
+        </div>
+        <div class="form-group">
+          <label>Archive</label>
+          <input type='checkbox' formControlName='archive' >
+        </div>
+        <div class="form-group">
+          <label>Request Detail</label>
+          <textarea row="4" cols="50" formControlName="case_request_detail" class="form-control"></textarea>
+          <small *ngIf="!editWorkLoadForm.controls.case_request_detail.valid" class="text-danger">case request detail is required </small>
+
+        </div>
+        
+        <!--response -->
+	<div class="form-group">
+          <label>Response</label>
+          <textarea row="200" cols="100" formControlName="help_response_detail" class="form-control"></textarea>
+        </div>
+
+        <!--keyword-->
+	<div formArrayName="_keywordList">
+          <div *ngFor="let keyword of editWorkLoadForm.controls._keywordList['controls']; let i=index" class="panel panel-default">
+            <div>
+              <span hidden>Keyword count: {{i + 1}}</span>
+              <a *ngIf="editWorkLoadForm.controls._keywordList.controls.length > 1" (click)="removeKeyword(i)" hidden>Remove keyword </a>
+            </div>
+            <div hidden [formGroupName]="i">
+              <div class="form-group col-xs-6">
+                <label hideen>Keyword</label>
+                <input type="hidden" class="form-control" formControlName="word">
+              </div>
+              <div class="form-group col-xs-6">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+         <a (click)="addKeyword()" style="cursor: default">Add another keyword + </a>
+        </div>
+
+       <!-- contact -->
+       <fieldset formGroupName="_contact_info">
+        <div class="form-group">
+          <label>First</label>
+          <input type="text" class="form-control" formControlName="First" required>
+        </div>
+        <div class="form-group">
+          <label>Last</label>
+          <input type="text" class="form-control" formControlName="Last" required>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="text" class="form-control" formControlName="email" required>
+        </div>
+        <div class="form-group">
+          <label>Company Name</label>
+          <input type="text" class="form-control" formControlName="company" required>
+        </div>
+        <div class="form-group">
+          <label>Phone number</label>
+          <input type="text" class="form-control" formControlName="phone_number" required>
+        </div>
+        </fieldset>
+
+        <div class="margin-20">
+          <button type="submit" class="btn btn-primary pull-right" [disabled]="!editWorkLoadForm.valid">Submit</button>
+        </div>
+        <div class="clearfix"></div>
+
+
+
+       </form>
+    </div>
+  </div>
+</div>
+
+

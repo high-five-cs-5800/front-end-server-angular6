@@ -65,10 +65,6 @@ export class ManageRegularUserWorkloadComponent implements OnInit {
                 this.userService.getUserWorkloads(this.userId).subscribe( data => { this.workloadsUsers = data; });
                 this.router.navigate(['manage-regular-user-workload']);
            },error=>{console.log(error)});
-           //loading the list of workload
-           //this.userService.getWorkloads().subscribe( data => { this.workloadsPool = data; });
-           //this.userService.getUserWorkloads(this.userId).subscribe( data => { this.workloadsUsers = data; });
-           //this.router.navigate(['manage-regular-user-workload']);
         },
         error => {
              console.log(error);
@@ -97,5 +93,13 @@ export class ManageRegularUserWorkloadComponent implements OnInit {
         });
 
   }
+
+   editWorkload(workload: Workloads): void {
+    sessionStorage.removeItem("editWorkloadId");
+    sessionStorage.setItem("editWorkloadId", workload.id.toString());
+    this.router.navigate(['edit-regular-user-workload']);
+   }
+
+
 }
 

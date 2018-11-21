@@ -25,6 +25,7 @@ import { ConfigComponent } from './config/config.component';
 import { ManageRegularUserWorkloadComponent } from './manage-regular-user-workload/manage-regular-user-workload.component';
 
 import { AngularDualListBoxModule } from 'angular-dual-listbox';
+import { EditRegularUserWorkloadComponent } from './edit-regular-user-workload/edit-regular-user-workload.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { AngularDualListBoxModule } from 'angular-dual-listbox';
     ListWorkloadComponent,
     EditWorkloadComponent,
     ConfigComponent,
-    ManageRegularUserWorkloadComponent
+    ManageRegularUserWorkloadComponent,
+    EditRegularUserWorkloadComponent
   ],
   imports: [
     BrowserModule,
