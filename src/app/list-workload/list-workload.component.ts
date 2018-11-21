@@ -39,8 +39,7 @@ export class ListWorkloadComponent implements OnInit {
     sessionStorage.removeItem("editWorkloadId");
     sessionStorage.setItem("editWorkloadId", workload.id.toString());
     this.router.navigate(['edit-workload']);
-  };
- 
+  }; 
 
   onLogout(){
     this.authService.logout();

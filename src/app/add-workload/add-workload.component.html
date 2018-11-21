@@ -43,7 +43,8 @@
         </div>
         <div class="form-group">
           <label>Request Detail</label>
-          <input type="text" name="case_request_detail" class="form-control" id="case_request_detail" placeholder="Enter request detail.">
+          <textarea row="4" cols="50" formControlName="case_request_detail" class="form-control"></textarea>
+          <small *ngIf="!addWorkLoadForm.controls.case_request_detail.valid" class="text-danger">request detail is required </small>
         </div>
 
 

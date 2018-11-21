@@ -36,13 +36,6 @@ export class UserService {
   }
 
   updateUser(user: User) {
-    //user.id = "";
-    //const options =  { responseType: 'text' as 'text', withCredentials: true };
-    //u = { username: user.username, title: user.title, user_type: user.user_type };
-    //User.prototype$updateAttributes({ id: user.id }, { username: user.username }, {title: user.title }, { user_type: user.user_type });
-    //delete user.id
-    //return this.http.put(this.baseUrl + 'UserAccounts/' + idK, { username: user.username, title: user.title, user_type: user.user_type }, httpOptions);
-    
     return this.http.post(this.baseUrl + 'UserAccounts/update?where[id]=' + user.id, { username: user.username, title: user.title, user_type: user.user_type }, httpOptions);
 
   }
@@ -58,7 +51,7 @@ export class UserService {
   getWorkloads() {
     return this.http.get<Workloads[]>(this.baseUrl + 'Workloads');
   }
-  
+
   getWorkloadById(id: string) {
     return this.http.get<Workloads>(this.baseUrl + 'Workloads/' + id);
   }
@@ -84,10 +77,31 @@ export class UserService {
                           , httpOptions);
   }
 
-  getUserWorkload(id: string){
-    console.log("testing: " + id);
-    return this.http.post(this.baseUrl + 'UserAccounts/' + id +'/' + id, httpOptions);
+   addWorkloadToUser(id: string, workload:Workloads){
+    console.log("fired");
+    return this.http.post(this.baseUrl + 'UserAccounts/' + id + '/workloadList/', { 
+                                                                                        case_type: workload.case_type, 
+                                                                                        case_purpose: workload.case_purpose,
+                                                                                        subject: workload.subject,
+                                                                                        product_line: workload.product_line,
+                                                                                        archive: workload.archive,
+                                                                                        case_request_detail: workload.case_request_detail,
+                                                                                        help_response_detail: workload.help_response_detail,
+                                                                                        userAccountId: workload.userAccountId,
+                                                                                        _keywordList: workload._keywordList,
+                                                                                        _contact_info: workload._contact_info
+                                                                                      }
+                          , httpOptions);
+
+
+   }
+
+  getUserWorkloads(id: string){
+    return this.http.get<Workloads[]>(this.baseUrl + 'UserAccounts/' + id +'/workloadList', httpOptions);
   }
- 
- 
+  
+  deleteUserWorkload(id: string, workload: Workloads){
+   return this.http.delete(this.baseUrl + 'UserAccounts/' + id +'/workloadList/' + workload.id, httpOptions);
+
+  }
 }

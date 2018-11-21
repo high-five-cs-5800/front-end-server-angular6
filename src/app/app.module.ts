@@ -23,9 +23,8 @@ import { ListWorkloadComponent } from './list-workload/list-workload.component';
 import { EditWorkloadComponent } from './edit-workload/edit-workload.component';
 import { ConfigComponent } from './config/config.component';
 import { ManageRegularUserWorkloadComponent } from './manage-regular-user-workload/manage-regular-user-workload.component';
-//import { CustExtBrowserXhr } from "./cust-ext-browser-xhr";
 
-
+import { AngularDualListBoxModule } from 'angular-dual-listbox';
 
 @NgModule({
   declarations: [
@@ -51,7 +50,8 @@ import { ManageRegularUserWorkloadComponent } from './manage-regular-user-worklo
     HttpClientModule,
     HttpClientJsonpModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularDualListBoxModule
   ],
   providers: [
     AuthenticationService, UserService, 

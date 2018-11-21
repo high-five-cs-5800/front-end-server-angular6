@@ -111,6 +111,4 @@ export class EditWorkloadComponent implements OnInit {
 
   }
 
-
-
 }

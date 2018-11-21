@@ -4,3 +4,68 @@
 <a [routerLink]="''" (click)="onLogout()"> Log out </a><br>
 <a [routerLink]="''" (click)="onManageWorkload()"> Manage Workload </a><br>
 <a [routerLink]="''" (click)="onDashBoard()">User Dashboard </a><br>
+
+<div class="container-fluid">
+   <p>Case Pool</p>
+   <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Case type</th>
+      <th>Case purpose</th>
+      <th>Subject</th>
+      <th>product line<th>
+      <th>Case Request detail</th>
+      <th>User account</th>
+      <th><th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let workload of workloadsPool">
+      <td> {{workload.id}}</td>
+      <td> {{workload.case_type}}</td>
+      <td> {{workload.case_purpose}}</td>
+      <td> {{workload.subject}}</td>
+      <td> {{workload.product_line}}</td>
+      <td> {{workload.case_request_detail}}</td>
+      <td> {{workload.userAccountId}}<td>
+      <td>
+            <button class="btn btn-danger" (click)="addWorkload(workload)"> Add to your workload</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <p>Your list of cases</p>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Case type</th>
+      <th>Case purpose</th>
+      <th>Subject</th>
+      <th>product line<th>
+      <th>Case Request detail</th>
+      <th>User account</th>
+      <th></th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let workload2 of workloadsUsers">
+      <td>{{workload2.id}}</td>
+      <td> {{workload2.case_type}} </td>
+      <td> {{workload2.case_purpose}} </td>
+      <td> {{workload2.subject}}  </td>
+      <td> {{workload2.product_line}}  </td>
+      <td> {{workload2.case_request_detail}}  </td>
+      <td> {{workload2.userAccountId}}<td>
+
+      <td>
+         <button class="btn btn-danger" (click)="removeWorkload(workload2)"> Remove from your workload</button>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+</div>
