@@ -61,8 +61,14 @@ export class EditRegularUserWorkloadComponent implements OnInit {
       }
      )
      this.userService.getWorkloadById(workloadId).subscribe( data => { 
-        if(data.help_response_detail ==  "" || data.help_response_detail == null) 
-            data.help_response_detail = ""; 
+        if(data.help_response_detail ==  "" || data.help_response_detail == null){ 
+            data.help_response_detail = "";
+            var n = data._keywordList.length;
+            //this.removeKeyword(0);
+            for(let i = 0; i < n-1; i++){
+              this.addKeyword();
+            }
+ 	}
         this.editWorkLoadForm.setValue(data);
      });
 

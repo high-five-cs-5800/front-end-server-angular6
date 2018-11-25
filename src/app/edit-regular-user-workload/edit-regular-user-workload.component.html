@@ -64,13 +64,13 @@
 	<div formArrayName="_keywordList">
           <div *ngFor="let keyword of editWorkLoadForm.controls._keywordList['controls']; let i=index" class="panel panel-default">
             <div>
-              <span hidden>Keyword count: {{i + 1}}</span>
-              <a *ngIf="editWorkLoadForm.controls._keywordList.controls.length > 1" (click)="removeKeyword(i)" hidden>Remove keyword </a>
+              <span>Keyword count: {{i + 1}}</span>
+              <a *ngIf="editWorkLoadForm.controls._keywordList.controls.length > 1" (click)="removeKeyword(i)">Remove keyword </a>
             </div>
-            <div hidden [formGroupName]="i">
+            <div [formGroupName]="i">
               <div class="form-group col-xs-6">
-                <label hideen>Keyword</label>
-                <input type="hidden" class="form-control" formControlName="word">
+                <label>Keyword</label>
+                <input class="form-control" formControlName="word">
               </div>
               <div class="form-group col-xs-6">
 

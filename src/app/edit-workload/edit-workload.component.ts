@@ -62,6 +62,12 @@ export class EditWorkloadComponent implements OnInit {
    )
    this.userService.getWorkloadById(workloadId)
      .subscribe( data => {
+         var n = data._keywordList.length;
+         //this.removeKeyword(0);
+         for(let i = 0; i < n-1; i++){
+              this.addKeyword();
+          }
+
          this.editWorkLoadForm.setValue(data);
      });
   }

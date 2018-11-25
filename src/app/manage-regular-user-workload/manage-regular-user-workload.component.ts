@@ -34,7 +34,7 @@ export class ManageRegularUserWorkloadComponent implements OnInit {
     	if(key === 'userId')
            this.userId = value;
     });
-    this.userService.getWorkloads()
+    this.userService.getWorkloadsWithNoId()
         .subscribe( data => {
            this.workloadsPool = data;
         });
@@ -61,7 +61,7 @@ export class ManageRegularUserWorkloadComponent implements OnInit {
         .subscribe( 
          data => {
            this.userService.deleteWorkload(workload.id).subscribe(data=>{
-		this.userService.getWorkloads().subscribe( data => { this.workloadsPool = data; });
+		this.userService.getWorkloadsWithNoId().subscribe( data => { this.workloadsPool = data; });
                 this.userService.getUserWorkloads(this.userId).subscribe( data => { this.workloadsUsers = data; });
                 this.router.navigate(['manage-regular-user-workload']);
            },error=>{console.log(error)});
@@ -82,7 +82,7 @@ export class ManageRegularUserWorkloadComponent implements OnInit {
            console.log(workload.product_line);
            this.userService.createWorkload(workload).subscribe(
               data => {
-	           this.userService.getWorkloads().subscribe( data1 => {this.workloadsPool = data1;});
+	           this.userService.getWorkloadsWithNoId().subscribe( data1 => {this.workloadsPool = data1;});
 	           this.userService.getUserWorkloads(this.userId).subscribe( data2 => {this.workloadsUsers = data2;});
 	           this.router.navigate(['manage-regular-user-workload']);
               }

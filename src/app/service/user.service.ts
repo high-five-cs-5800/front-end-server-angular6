@@ -51,6 +51,11 @@ export class UserService {
   getWorkloads() {
     return this.http.get<Workloads[]>(this.baseUrl + 'Workloads');
   }
+  
+  getWorkloadsWithNoId(){
+    return this.http.get<Workloads[]>(this.baseUrl + 'Workloads?filter=%7B%22userAccountId%22%3Anull%7D');
+  }
+
 
   getWorkloadById(id: string) {
     return this.http.get<Workloads>(this.baseUrl + 'Workloads/' + id);
