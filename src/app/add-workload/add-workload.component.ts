@@ -38,7 +38,7 @@ export class AddWorkloadComponent implements OnInit {
             "first", "well", "even", "new", "want", "because", "any", "these", "give", "day", "most", "us",
             "time", "person", "year", "way", "day", "thing", "man", "would", "life", "hand", "part", "child",
             "eye", "woman", "place", "work", "week", "case", "point", "government", "company", "number", "group",
-            "problem", "fact", "little", "long", "great", "big", "own"];
+            "problem", "fact", "little", "long", "great", "big", "own", ""];
     //var i;
     //for(i = 0; i < 3; i++){
     //	console.log(i);
@@ -125,7 +125,7 @@ export class AddWorkloadComponent implements OnInit {
       //var item2 = this.formBuilder.group({ word: "test" });
 	
       var newArr = Array.from(this.dictSet);
-
+      console.log(newArr);
       for(let item of newArr)
       {
           if(!this.commonWordSet.has(item))
