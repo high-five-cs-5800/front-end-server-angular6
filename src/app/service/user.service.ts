@@ -138,4 +138,8 @@ export class UserService {
 	getWorkloadKeyWords(id: string){
                	return this.http.get<Keyword[]>(this.baseUrl + 'Workloads/' + id +'/keywordList', httpOptions);
         }
+
+	clearKeyWords(id: string){
+		 return this.http.post(this.baseUrl + 'Keywords/' + id, httpOptions);
+	}
 }

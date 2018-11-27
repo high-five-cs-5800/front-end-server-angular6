@@ -6,7 +6,7 @@ import { UserService } from "../service/user.service";
 
 import { Router } from "@angular/router";
 import { Workloads } from "../model/workload.model";
-
+import { Keyword } from "../model/keyword.model";
 
 
 
@@ -76,10 +76,17 @@ export class ManageRegularUserWorkloadComponent implements OnInit {
 				workload.keywordList = input3;
 				this.userService.postWorkloadContact(id, workload).subscribe(data2  => { 
 					this.userService.postWorkloadKeywords(id, workload).subscribe(data3 => {
+						  this.userService.getWorkloadKeyWords(old_id).subscribe( input33 => {
+							//keywords: keyWord[];
+							let keywords = input33;
+							for(id in keywords){
+							   this.userService.clearKeyWords(keywords[id].id);
+							}
 					          this.userService.deleteWorkload(old_id).subscribe(data=>{
 				                  	this.userService.getWorkloadsWithNoId().subscribe( data => { this.workloadsPool = data; });
 				                  	this.userService.getUserWorkloads(this.userId).subscribe( data => { this.workloadsUsers = data; });
 				                  	this.router.navigate(['manage-regular-user-workload']);
+                                                  })
                                                   })
  					})
 				})
@@ -95,8 +102,12 @@ export class ManageRegularUserWorkloadComponent implements OnInit {
     this.userService.getWorkloadContact(workload.id).subscribe( input =>  {
                 workload.contact_info = input;
                 workload.contact_info.id = null;
-                this.userService.getWorkloadKeyWords(workload.id).subscribe( input2 => { 
+                this.userService.getWorkloadKeyWords(workload.id).subscribe( input2 => {
                         workload.keywordList = input2;
+                        let keywords = input2
+			for(var i = 0; i < workload.keywordList.length; i++){
+			     this.userService.clearKeyWords(workload.keywordList[i].id);
+                        }
 				this.userService.deleteUserWorkload(this.userId, workload).subscribe( data => {
 					workload.id = null;
 					workload.userAccountId = null;
@@ -109,7 +120,8 @@ export class ManageRegularUserWorkloadComponent implements OnInit {
                                                         	this.router.navigate(['manage-regular-user-workload']);
                                                   	})
                                         	})
-                                	})
+
+                                        })
 			        })
                 })
 

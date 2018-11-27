@@ -51,5 +51,8 @@ export class SearchComponent implements OnInit {
 
   }
 
+  onSearch(){
+    this.router.navigate(['search']);
+  }
 
 }
