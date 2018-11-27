@@ -46,6 +46,10 @@ export class ManageRegularUserWorkloadComponent implements OnInit {
 
   }
 
+  onSearch(){
+    this.router.navigate(['search']);
+  }
+
   onManageWorkload(){
     this.router.navigate(['manage-regular-user-workload']);
   }

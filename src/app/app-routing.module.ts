@@ -15,7 +15,7 @@ import { ClientUserComponent } from "./client-user/client-user.component";
 
 import { ManageRegularUserWorkloadComponent } from './manage-regular-user-workload/manage-regular-user-workload.component';
 import { EditRegularUserWorkloadComponent } from './edit-regular-user-workload/edit-regular-user-workload.component';
-
+import { SearchComponent } from './search/search.component';
 
 
 
@@ -35,6 +35,7 @@ const routes: Routes = [
 
   { path: 'manage-regular-user-workload', component: ManageRegularUserWorkloadComponent },
   { path: 'edit-regular-user-workload',   component: EditRegularUserWorkloadComponent },
+  { path: 'search', 			  component: SearchComponent },
 
   { path : '', component : LoginComponent }
 ];

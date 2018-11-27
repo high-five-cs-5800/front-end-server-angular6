@@ -26,7 +26,6 @@ import { ManageRegularUserWorkloadComponent } from './manage-regular-user-worklo
 
 import { AngularDualListBoxModule } from 'angular-dual-listbox';
 import { EditRegularUserWorkloadComponent } from './edit-regular-user-workload/edit-regular-user-workload.component';
-//import { SerachComponent } from './serach/serach.component';
 import { SearchComponent } from './search/search.component';
 
 @NgModule({
@@ -47,7 +46,6 @@ import { SearchComponent } from './search/search.component';
     ConfigComponent,
     ManageRegularUserWorkloadComponent,
     EditRegularUserWorkloadComponent,
-  //  SerachComponent,
     SearchComponent
   ],
   imports: [

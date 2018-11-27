@@ -28,6 +28,10 @@ export class RegularUserComponent implements OnInit {
 
   onDashBoard(){
     this.router.navigate(['regular-user']);
-
   }
+
+  onSearch(){
+    this.router.navigate(['search']);
+  }
+
 }

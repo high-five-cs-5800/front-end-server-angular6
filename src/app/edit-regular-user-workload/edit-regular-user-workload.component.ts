@@ -85,6 +85,11 @@ export class EditRegularUserWorkloadComponent implements OnInit {
     this.router.navigate(['manage-regular-user-workload']);
   }
 
+  onSearch(){
+    this.router.navigate(['search']);
+  }
+
+
   onDashBoard(){
     this.router.navigate(['regular-user']);
 
