@@ -9,8 +9,8 @@ export class Workloads {
   subject: string;
   product_line: string;
   archive: boolean;
-  _contact_info: Contact[];
-  _keywordList: Keyword[];
+  contact_info: Contact;
+  keywordList: Keyword[];
   case_request_detail: string;
   help_response_detail: string;
   userAccountId: string;  

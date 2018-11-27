@@ -16,7 +16,10 @@
           <label>Id </label>
           <input type="text" class="form-control" formControlName="id">
         </div>
-
+        <div class="form-group">
+          <label>Account Id </label>
+          <input type="text" class="form-control" formControlName="userAccountId">
+        </div>
         <div class="form-group">
           <label for="case_type">Case Type</label>
           <select formControlName="case_type" class="form-control" id="case_type" [(ngModel)]="lists[1].value">
@@ -42,28 +45,33 @@
         </div>
 	<div class="form-group">
           <label>Archive</label>
-          <input type='checkbox' formControlName='archive' >
+          <input type='checkbox' formControlName='archive'>
         </div>
 	<div class="form-group">
           <label>Request Detail</label>
           <textarea row="4" cols="50" formControlName="case_request_detail" class="form-control"></textarea>
           <small *ngIf="!editWorkLoadForm.controls.case_request_detail.valid" class="text-danger">case request detail is required </small>
-
         </div>
 
         <!--keyword-->
-
-
-        <div formArrayName="_keywordList" hidden>
-          <div *ngFor="let keyword of editWorkLoadForm.controls._keywordList['controls']; let i=index" class="panel panel-default" hidden>
-            <div hidden>
-              <span hidden>Keyword count: {{i + 1}}</span>
-              <a *ngIf="editWorkLoadForm.controls._keywordList.controls.length > 1" (click)="removeKeyword(i)" hidden>Remove keyword </a>
+        <div formArrayName="keywordList">
+          <div *ngFor="let keyword of editWorkLoadForm.controls.keywordList['controls']; let i=index" class="panel panel-default">
+            <div>
+              <span>Keyword count: {{i + 1}}</span>
+              <a *ngIf="editWorkLoadForm.controls.keywordList.controls.length > 1" (click)="removeKeyword(i)" hidden> Remove keyword - </a>
             </div>
-            <div hidden [formGroupName]="i">
-              <div class="form-group col-xs-6" hidden>
-                <label hideen>Keyword</label>
-                <input type="hidden" class="form-control" formControlName="word">
+            <div [formGroupName]="i">
+              <div class="form-group col-xs-6">
+                <label>Keyword</label>
+                <input class="form-control" formControlName="word">
+              </div>
+              <div class="form-group col-xs-6">
+                <label>id</label>
+                <input class="form-control" formControlName="id">
+              </div>
+              <div class="form-group col-xs-6">
+                <label>workloadId</label>
+                <input class="form-control" formControlName="workloadId">
               </div>
               <div class="form-group col-xs-6" hidden>
 
@@ -73,10 +81,18 @@
         </div>
         <div hidden>
           <a (click)="addKeyword()" style="cursor: default" hidden>Add another keyword + </a>
-        </div>
+	</div>
 
-       <!-- contact -->
-       <fieldset formGroupName="_contact_info">
+       	<!-- contact -->
+       	<fieldset formGroupName="contact_info">
+       	<div hidden class="form-group">
+          <label hidden>id</label>
+          <input type="text" class="form-control" formControlName="id" hidden>
+       	</div>
+	<div hidden class="form-group">
+          <label hidden>worklaod id</label>
+          <input hidden type="text" class="form-control" formControlName="workloadId">
+        </div>
         <div class="form-group">
           <label>First</label>
           <input type="text" class="form-control" formControlName="First" required>

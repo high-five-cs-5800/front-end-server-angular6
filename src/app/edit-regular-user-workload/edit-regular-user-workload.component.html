@@ -16,6 +16,10 @@
           <label>Id </label>
           <input type="text" class="form-control" formControlName="id">
         </div>
+	<div class="form-group">
+          <label>Account Id </label>
+          <input type="text" class="form-control" formControlName="userAccountId">
+        </div>
         <div class="form-group">
           <label>User Id </label>
           <input type="text" class="form-control" formControlName="userAccountId">
@@ -61,16 +65,24 @@
         </div>
 
         <!--keyword-->
-	<div formArrayName="_keywordList">
-          <div *ngFor="let keyword of editWorkLoadForm.controls._keywordList['controls']; let i=index" class="panel panel-default">
+	<div formArrayName="keywordList">
+          <div *ngFor="let keyword of editWorkLoadForm.controls.keywordList['controls']; let i=index" class="panel panel-default">
             <div>
               <span>Keyword count: {{i + 1}}</span>
-              <a *ngIf="editWorkLoadForm.controls._keywordList.controls.length > 1" (click)="removeKeyword(i)">Remove keyword </a>
+              <a *ngIf="editWorkLoadForm.controls.keywordList.controls.length > 1" (click)="removeKeyword(i)">Remove keyword - </a>
             </div>
             <div [formGroupName]="i">
               <div class="form-group col-xs-6">
                 <label>Keyword</label>
                 <input class="form-control" formControlName="word">
+              </div>
+              <div class="form-group col-xs-6" hidden>
+                <label>id</label>
+                <input class="form-control" formControlName="id">
+              </div>
+              <div class="form-group col-xs-6" hidden>
+                <label>Workload Id</label>
+                <input class="form-control" formControlName="workloadId">
               </div>
               <div class="form-group col-xs-6">
 
@@ -83,7 +95,15 @@
         </div>
 
        <!-- contact -->
-       <fieldset formGroupName="_contact_info">
+       <fieldset formGroupName="contact_info">
+	<div class="form-group">
+          <label>id</label>
+          <input type="text" class="form-control" formControlName="id">
+        </div>
+	<div class="form-group">
+          <label>worklaod id</label>
+          <input type="text" class="form-control" formControlName="workloadId">
+        </div>
         <div class="form-group">
           <label>First</label>
           <input type="text" class="form-control" formControlName="First" required>

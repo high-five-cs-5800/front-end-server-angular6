@@ -48,10 +48,13 @@ export class EditWorkloadComponent implements OnInit {
          product_line: new FormControl,
          archive: new FormControl,
          case_request_detail: new FormControl,
-         _keywordList: new FormArray([
+         userAccountId: new FormControl,
+         keywordList: new FormArray([
             this.initKeywordList()
          ]),
-          _contact_info: new FormGroup({
+          contact_info: new FormGroup({
+               id: new FormControl(),
+	       workloadId: new FormControl(),
                First: new FormControl(),
                Last: new FormControl(),
                email: new FormControl(),
@@ -62,13 +65,17 @@ export class EditWorkloadComponent implements OnInit {
    )
    this.userService.getWorkloadById(workloadId)
      .subscribe( data => {
-         var n = data._keywordList.length;
-         //this.removeKeyword(0);
-         for(let i = 0; i < n-1; i++){
-              this.addKeyword();
-          }
-
-         this.editWorkLoadForm.setValue(data);
+         this.userService.getWorkloadContact(workloadId).subscribe( data1 => {
+		data.contact_info = data1;
+		this.userService.getWorkloadKeyWords(workloadId).subscribe( data2 => {
+			data.keywordList = data2;
+			var n = data.keywordList.length;
+         		for(let i = 0; i < n-1; i++){
+              			this.addKeyword();
+          		}
+         		this.editWorkLoadForm.setValue(data);
+                });
+         });
      });
   }
 
@@ -78,19 +85,21 @@ export class EditWorkloadComponent implements OnInit {
   }
 
   addKeyword(){
-        const control = <FormArray>this.editWorkLoadForm.controls['_keywordList'];
+        const control = <FormArray>this.editWorkLoadForm.controls['keywordList'];
         control.push(this.initKeywordList());
   }
 
   removeKeyword(i: number) {
-        const control = <FormArray>this.editWorkLoadForm.controls['_keywordList'];
+        const control = <FormArray>this.editWorkLoadForm.controls['keywordList'];
         control.removeAt(i);
     }
 
 
   initKeywordList(){
         return this.formBuilder.group({
-           word: [""]
+          word: new FormControl(),
+          id:   new FormControl(),
+          workloadId: new FormControl()
         });
   }
 

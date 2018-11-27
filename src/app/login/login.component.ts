@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
         .pipe(first())
             .subscribe(
                 login => {
-                    //this.router.navigate([this.returnUrl]);
                     this.userService.getUserById(login.userId)
                         .subscribe( data => {
                           console.log(data);

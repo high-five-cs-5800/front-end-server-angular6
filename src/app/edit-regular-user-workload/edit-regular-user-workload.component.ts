@@ -47,10 +47,12 @@ export class EditRegularUserWorkloadComponent implements OnInit {
          archive: new FormControl,
          case_request_detail: new FormControl,
  	 help_response_detail: new FormControl,
-         _keywordList: new FormArray([
+         keywordList: new FormArray([
             this.initKeywordList()
          ]),
-          _contact_info: new FormGroup({
+         contact_info: new FormGroup({
+               id: new FormControl(),
+               workloadId: new FormControl(),
                First: new FormControl(),
                Last: new FormControl(),
                email: new FormControl(),
@@ -61,15 +63,20 @@ export class EditRegularUserWorkloadComponent implements OnInit {
       }
      )
      this.userService.getWorkloadById(workloadId).subscribe( data => { 
-        if(data.help_response_detail ==  "" || data.help_response_detail == null){ 
-            data.help_response_detail = "";
-            var n = data._keywordList.length;
-            //this.removeKeyword(0);
-            for(let i = 0; i < n-1; i++){
-              this.addKeyword();
-            }
- 	}
-        this.editWorkLoadForm.setValue(data);
+ 	this.userService.getWorkloadContact(workloadId).subscribe( data1 => {
+                data.contact_info = data1;
+                this.userService.getWorkloadKeyWords(workloadId).subscribe( data2 => {
+                        data.keywordList = data2;
+			if(data.help_response_detail ==  "" || data.help_response_detail == null){ 
+		            data.help_response_detail = "";
+			}
+                        var n = data.keywordList.length;
+                        for(let i = 0; i < n-1; i++){
+                                this.addKeyword();
+                        }
+                        this.editWorkLoadForm.setValue(data);
+                });
+         });
      });
 
   }
@@ -89,19 +96,21 @@ export class EditRegularUserWorkloadComponent implements OnInit {
   };
 
   addKeyword(){
-        const control = <FormArray>this.editWorkLoadForm.controls['_keywordList'];
+        const control = <FormArray>this.editWorkLoadForm.controls['keywordList'];
         control.push(this.initKeywordList());
   }
 
   removeKeyword(i: number) {
-        const control = <FormArray>this.editWorkLoadForm.controls['_keywordList'];
+        const control = <FormArray>this.editWorkLoadForm.controls['keywordList'];
         control.removeAt(i);
     }
 
 
   initKeywordList(){
         return this.formBuilder.group({
-           word: [""]
+          word: new FormControl(),
+          id:   new FormControl(),
+          workloadId: new FormControl()
         });
   }
 

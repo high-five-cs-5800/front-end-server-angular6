@@ -12,6 +12,7 @@ import { Keyword }  from "../model/keyword.model";
         'access-control-allow-origin': '*',
         'access-control-allow-credentials': 'true'
       })
+      
   };
 
 
@@ -52,21 +53,27 @@ export class UserService {
     return this.http.get<Workloads[]>(this.baseUrl + 'Workloads');
   }
   
-  getWorkloadsWithNoId(){
-    return this.http.get<Workloads[]>(this.baseUrl + 'Workloads?filter=%7B%22userAccountId%22%3Anull%7D');
-  }
+  	getWorkloadsWithNoId(){
+    		return this.http.get<Workloads[]>(this.baseUrl + 'Workloads?filter=%7B%22where%22%3A%20%7B%22userAccountId%22%3A%20null%20%7D%20%7D');
+  	}
 
 
-  getWorkloadById(id: string) {
-    return this.http.get<Workloads>(this.baseUrl + 'Workloads/' + id);
-  }
+  	getWorkloadById(id: string) {
+    		return this.http.get<Workloads>(this.baseUrl + 'Workloads/' + id);
+  	}
 
-  deleteWorkload(id: string) {
-    return this.http.delete(this.baseUrl + 'Workloads/' + id);
-  }
+  	deleteWorkload(id: string) {
+    		return this.http.delete(this.baseUrl + 'Workloads/' + id);
+  	}
 
-  updateWorkload(workload: Workloads){
-    return this.http.post(this.baseUrl + 'Workloads/update?where[id]=' + workload.id, { 
+  	updateWorkload(workload: Workloads){
+    		for(var item in workload.keywordList){
+
+			workload.keywordList[item].id = workload.userAccountId;
+ 			workload.keywordList[item].workloadId = workload.id;
+    		}
+
+    		return this.http.post(this.baseUrl + 'Workloads/update?where[id]=' + workload.id, { 
                                                                                         case_type: workload.case_type, 
                                                                                         case_purpose: workload.case_purpose,
                                                                                         subject: workload.subject,
@@ -76,37 +83,59 @@ export class UserService {
                                                                                         help_response_detail: workload.help_response_detail,
                                                                                         id: workload.id,
                                                                                         userAccountId: workload.userAccountId,
-                                                                                        _keywordList: workload._keywordList,
-                                                                                        _contact_info: workload._contact_info
+                                                                                        keywordList: workload.keywordList,
+                                                                                        contact_info: workload.contact_info
                                                                                       }
                           , httpOptions);
-  }
+  	}
 
-   addWorkloadToUser(id: string, workload:Workloads){
-    console.log("fired");
-    return this.http.post(this.baseUrl + 'UserAccounts/' + id + '/workloadList/', { 
-                                                                                        case_type: workload.case_type, 
+   	addWorkloadToUser(id: string, workload:Workloads){
+		//console.log("call add");
+	    	return this.http.post(this.baseUrl + 'UserAccounts/' + id + '/workloadList', {
+                                                                                        case_type: workload.case_type,
                                                                                         case_purpose: workload.case_purpose,
                                                                                         subject: workload.subject,
                                                                                         product_line: workload.product_line,
                                                                                         archive: workload.archive,
                                                                                         case_request_detail: workload.case_request_detail,
                                                                                         help_response_detail: workload.help_response_detail,
-                                                                                        userAccountId: workload.userAccountId,
-                                                                                        _keywordList: workload._keywordList,
-                                                                                        _contact_info: workload._contact_info
-                                                                                      }
-                          , httpOptions);
+                                                                                        userAccountId: id
+                                                                                     }, httpOptions);
 
 
-   }
+   	}
 
-  getUserWorkloads(id: string){
-    return this.http.get<Workloads[]>(this.baseUrl + 'UserAccounts/' + id +'/workloadList', httpOptions);
-  }
+  	getUserWorkloads(id: string){
+    		return this.http.get<Workloads[]>(this.baseUrl + 'UserAccounts/' + id +'/workloadList', httpOptions);
+  	}
   
-  deleteUserWorkload(id: string, workload: Workloads){
-   return this.http.delete(this.baseUrl + 'UserAccounts/' + id +'/workloadList/' + workload.id, httpOptions);
+	deleteUserWorkload(id: string, workload: Workloads){
+   		return this.http.delete(this.baseUrl + 'UserAccounts/' + id +'/workloadList/' + workload.id, httpOptions);
 
-  }
+  	}
+
+	postWorkloadContact(id: string, workload:Workloads){
+                workload.contact_info.workloadId = id;
+		return this.http.post(this.baseUrl + 'Workloads/' + id + '/contact_info/', workload.contact_info
+                , httpOptions);
+
+        }
+
+	postWorkloadKeywords(id:string, workload:Workloads){
+		for(var item in workload.keywordList){
+			workload.keywordList[item].id = workload.userAccountId;
+                        workload.keywordList[item].workloadId = workload.id;
+
+                }
+		return this.http.post(this.baseUrl + 'Workloads/' + id + '/keywordList/', workload.keywordList
+                , httpOptions);
+	}
+
+	getWorkloadContact(id: string){
+		return this.http.get<Contact>(this.baseUrl + 'Workloads/' + id +'/contact_info', httpOptions);
+        }
+	
+	getWorkloadKeyWords(id: string){
+               	return this.http.get<Keyword[]>(this.baseUrl + 'Workloads/' + id +'/keywordList', httpOptions);
+        }
 }
