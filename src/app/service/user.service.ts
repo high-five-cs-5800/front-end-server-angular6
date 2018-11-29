@@ -141,5 +141,16 @@ export class UserService {
 
 	clearKeyWords(id: string){
 		 return this.http.post(this.baseUrl + 'Keywords/' + id, httpOptions);
+	
 	}
+       
+        getKeywords(){
+                 return this.http.get<Keyword[]>(this.baseUrl +  'Keywords');
+	}
+
+	getKeywordsWithWord(word: string){
+                return this.http.get<Keyword[]>(this.baseUrl +'Keywords?filter=%7B%22where%22%3A%20%7B%22word%22%3A%22' + word + '%22%7D%7D');
+        }
+
+
 }

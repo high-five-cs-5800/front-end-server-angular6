@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 
 import { AuthenticationService   } from "../service/auth.service";
 import { UserService } from "../service/user.service";
-
+//import { KeywordService } from "../service/keyword.service";
 
 import { Router } from "@angular/router";
 import { Workloads } from "../model/workload.model";
+import { Keyword } from "../model/keyword.model";
+
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-search',
@@ -14,10 +17,12 @@ import { Workloads } from "../model/workload.model";
 })
 export class SearchComponent implements OnInit {
 
+  keywordPool: Keyword[];
   workloadsPool: Workloads[];
   workloadsUsers: Workloads[];
   userId: string;
-  constructor(private authService: AuthenticationService, private router: Router, private userService: UserService) { }
+  subForm: FormGroup;
+  constructor(private formBuilder: FormBuilder,private authService: AuthenticationService, private router: Router, private userService: UserService) { }
 
   onLogout(){
     this.authService.logout();
@@ -30,17 +35,28 @@ export class SearchComponent implements OnInit {
         if(key === 'userId')
            this.userId = value;
     });
-    this.userService.getWorkloadsWithNoId()
-        .subscribe( data => {
-           this.workloadsPool = data;
-        });
-    this.userService.getUserWorkloads(this.userId)
-        .subscribe( data => {
-           this.workloadsUsers = data;
-        });
+    this.subForm = this.formBuilder.group({
+      search_keyword: ['', Validators.required]
+    });
 
 
   }
+
+  onSubmit(){
+   var word = this.subForm.value;
+   console.log("Clicked");
+   console.log(word);
+   // this.userService.getKeywordsWithWord(word)
+   //     .subscribe( data => {
+   //        this.keywordPool = data;
+   //     });
+   // for(let items of this.keywordPool)
+   // {
+   //     var id = items.word;
+   //     this.workloadUsers.push(this.userService.getWorkloadById(id));
+   // }
+  }
+
 
   onManageWorkload(){
     this.router.navigate(['manage-regular-user-workload']);

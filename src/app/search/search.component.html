@@ -7,35 +7,16 @@
 <a [routerLink]="''" (click)="onSearch()"> Search <a><br>
 
 <div class="container-fluid">
-   <p>Case Pool</p>
-   <table class="table table-striped">
-    <thead>
-    <tr>
-      <th>Id</th>
-      <th>Case type</th>
-      <th>Case purpose</th>
-      <th>Subject</th>
-      <th>product line<th>
-      <th>Case Request detail</th>
-      <th>User account</th>
-      <th><th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let workload of workloadsPool">
-      <td> {{workload.id}}</td>
-      <td> {{workload.case_type}}</td>
-      <td> {{workload.case_purpose}}</td>
-      <td> {{workload.subject}}</td>
-      <td> {{workload.product_line}}</td>
-      <td> {{workload.case_request_detail}}</td>
-      <td> {{workload.userAccountId}}<td>
-      <td>
-            <button class="btn btn-danger" (click)="addWorkload(workload)"> Add to your workload</button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+   <p>Search</p>
+    <div>
+       <form [formGroup]="subForm">
+         <div class="form-group">
+          <label>Search Word</label>
+          <input type="text" formControlName="search_keyword" class="form-control">
+         </div>
+         <button class="btn btn-danger" (click)="onSubmit()"> Search</button>
+       </form>   
+    </div>
 
 <p>Your list of cases</p>
   <table class="table table-striped">

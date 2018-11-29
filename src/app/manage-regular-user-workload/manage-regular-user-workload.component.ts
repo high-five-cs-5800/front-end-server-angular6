@@ -61,7 +61,7 @@ export class ManageRegularUserWorkloadComponent implements OnInit {
 
   addWorkload(workload: Workloads): void {
     //add workload to the user
-    
+
     this.userService.addWorkloadToUser(this.userId, workload)
         .subscribe( 
            data => {
