@@ -140,7 +140,7 @@ export class UserService {
         }
 
 	clearKeyWords(id: string){
-		 return this.http.post(this.baseUrl + 'Keywords/' + id, httpOptions);
+		 return this.http.delete(this.baseUrl + 'Keywords/' + id, httpOptions);
 	
 	}
        
@@ -148,8 +148,8 @@ export class UserService {
                  return this.http.get<Keyword[]>(this.baseUrl +  'Keywords');
 	}
 
-	getKeywordsWithWord(word: string){
-                return this.http.get<Keyword[]>(this.baseUrl +'Keywords?filter=%7B%22where%22%3A%20%7B%22word%22%3A%22' + word + '%22%7D%7D');
+	getKeywordsWithWord(words: string){
+                return this.http.get<Keyword[]>(this.baseUrl +'Keywords?filter=%7B%22where%22%3A%20%7B%22word%22%3A%22' + words + '%22%7D%7D');
         }
 
 

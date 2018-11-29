@@ -18,8 +18,9 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class SearchComponent implements OnInit {
 
   keywordPool: Keyword[];
-  workloadsPool: Workloads[];
-  workloadsUsers: Workloads[];
+  workloadSingle: Workloads;
+  workloadPool: Workloads[];
+  workloadsUsers = new Array<Workloads>();
   userId: string;
   subForm: FormGroup;
   constructor(private formBuilder: FormBuilder,private authService: AuthenticationService, private router: Router, private userService: UserService) { }
@@ -44,19 +45,14 @@ export class SearchComponent implements OnInit {
 
   onSubmit(){
    var word = this.subForm.value;
-   console.log("Clicked");
-   console.log(word);
-   // this.userService.getKeywordsWithWord(word)
-   //     .subscribe( data => {
-   //        this.keywordPool = data;
-   //     });
-   // for(let items of this.keywordPool)
-   // {
-   //     var id = items.word;
-   //     this.workloadUsers.push(this.userService.getWorkloadById(id));
-   // }
+   this.userService.getKeywordsWithWord(word.search_keyword)
+        .subscribe( data => {
+		for(let i = 0; i < data.length; i++){
+	          this.userService.getWorkloadById(data[i].workloadId)
+        		.subscribe(workload => { this.workloadsUsers.push(workload);})
+               }
+       });
   }
-
 
   onManageWorkload(){
     this.router.navigate(['manage-regular-user-workload']);
@@ -72,3 +68,4 @@ export class SearchComponent implements OnInit {
   }
 
 }
+

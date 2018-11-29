@@ -4,9 +4,10 @@
 <a [routerLink]="''" (click)="onLogout()"> Log out </a><br>
 <a [routerLink]="''" (click)="onManageWorkload()"> Manage Workload </a><br>
 <a [routerLink]="''" (click)="onDashBoard()">User Dashboard </a><br>
-<a [routerLink]="''" (click)="onSearch()"> Search <a><br>
+<a [routerLink]="''" (click)="onSearch()"> Search </a><br>
 
 <div class="container-fluid">
+<div>
    <p>Search</p>
     <div>
        <form [formGroup]="subForm">
@@ -17,7 +18,8 @@
          <button class="btn btn-danger" (click)="onSubmit()"> Search</button>
        </form>   
     </div>
-
+</div>
+<div>
 <p>Your list of cases</p>
   <table class="table table-striped">
     <thead>
@@ -30,7 +32,6 @@
       <th>Case Request detail</th>
       <th>User account</th>
       <th></th>
-
     </tr>
     </thead>
     <tbody>
@@ -42,15 +43,13 @@
       <td> {{workload2.product_line}}  </td>
       <td> {{workload2.case_request_detail}}  </td>
       <td> {{workload2.userAccountId}}<td>
-
       <td>
          <button class="btn btn-danger" (click)="removeWorkload(workload2)"> Remove from your workload</button>
          <button class="btn btn-danger" (click)="editWorkload(workload2)"> Response </button>
-
       </td>
-
     </tr>
     </tbody>
   </table>
+</div>
 </div>
 
