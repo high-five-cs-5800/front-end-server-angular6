@@ -20,6 +20,8 @@ import { Keyword } from "../model/keyword.model";
 export class ManageRegularUserWorkloadComponent implements OnInit {
   workloadsPool: Workloads[];
   workloadsUsers: Workloads[];
+  workloadsData = new Array<Workloads>();
+  workloadsArray = new Array<Workloads>();
   userId: string;
   constructor(private authService: AuthenticationService, private router: Router, private userService: UserService) { }
 
@@ -40,7 +42,9 @@ export class ManageRegularUserWorkloadComponent implements OnInit {
         });
     this.userService.getUserWorkloads(this.userId)
         .subscribe( data => {
-           this.workloadsUsers = data;
+           //this.workloadsUsers = data;
+        this.workloadsData = data;
+        this.filterArchive();
         });
 
 
@@ -83,7 +87,8 @@ export class ManageRegularUserWorkloadComponent implements OnInit {
 							   this.userService.clearKeyWords(keywords[id].id);
 							}
 					          this.userService.deleteWorkload(old_id).subscribe(data=>{
-				                  	this.userService.getWorkloadsWithNoId().subscribe( data => { this.workloadsPool = data; });
+				                  	this.userService.getWorkloadsWithNoId().subscribe( data => 
+								{ this.workloadsPool = data; }); 
 				                  	this.userService.getUserWorkloads(this.userId).subscribe( data => { this.workloadsUsers = data; });
 				                  	this.router.navigate(['manage-regular-user-workload']);
                                                   })
@@ -137,5 +142,21 @@ export class ManageRegularUserWorkloadComponent implements OnInit {
     sessionStorage.setItem("editWorkloadId", workload.id.toString());
     this.router.navigate(['edit-regular-user-workload']);
    }
+
+  filterArchive(): void{
+   console.log(this.workloadsData.length);
+   for(let i = 0; i < this.workloadsData.length; i++)
+   {
+     //console.log(this.workloadsData[i]);
+     if(this.workloadsData[i].archive == null)
+     { 
+	//console.log(this.workloadsData[i]);
+	this.workloadsArray.push(this.workloadsData[i]);
+     }
+   }
+   this.workloadsPool = this.workloadsArray;
+   console.log(this.workloadsPool);
+ }
+
 }
 

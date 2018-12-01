@@ -34,8 +34,11 @@
         </div>
         <div class="form-group">
           <label>Case Purpose</label>
-          <input type="text" class="form-control" formControlName="case_purpose">
-          <small *ngIf="!editWorkLoadForm.controls.case_purpose.valid" class="text-danger">case purpose  is required </small>
+           <select class="form-control" formControlName="case_purpose" [(ngModel)]="lists2[0].value">
+            <option *ngFor="let item2 of lists2" value={{item2.value}}>
+               {{item2.label}}
+             </option>
+          </select>
         </div>
         <div class="form-group">
           <label>Subject</label>

@@ -23,6 +23,10 @@ export class EditRegularUserWorkloadComponent implements OnInit {
     {value: 2, label: 'type 2'}
   ];
 
+  lists2 = [ 
+	{value: 'pre', label: 'pre'},
+        {value: 'post', label: 'post'}
+  ]; 
   editWorkLoadForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthenticationService, private userService: UserService) { }
@@ -131,6 +135,7 @@ export class EditRegularUserWorkloadComponent implements OnInit {
        });
   }
   onSubmit(){
+	this.editWorkLoadForm.controls['archive'].setValue(true);
           this.userService.updateWorkload(this.editWorkLoadForm.value).subscribe( 
                data => { this.router.navigate(['manage-regular-user-workload']); }
            );

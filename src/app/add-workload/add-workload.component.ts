@@ -27,6 +27,11 @@ export class AddWorkloadComponent implements OnInit {
     {value: 1, label: 'type 1'},
     {value: 2, label: 'type 2'}
   ];
+
+   lists2 = [ 
+	{value: 'pre', label: 'pre'},
+        {value: 'post', label: 'post'}
+  ]; 
  commonWordSet = new Set();
  common = [ "the", "be", "to", "of",  "and", "a", "in", "that", "have", "is", "i", "it", "for", "not",
             "on", "with", "he", "as", "you", "do", "at", "this", "but", "his", "by", "from", "they",
@@ -55,6 +60,7 @@ export class AddWorkloadComponent implements OnInit {
          product_line: new FormControl,
          archive: new FormControl,
          case_request_detail: new FormControl,
+	 help_response_detail: new FormControl,
          keywordList: new FormArray([
             this.initKeywordList()
          ]),
@@ -114,47 +120,43 @@ export class AddWorkloadComponent implements OnInit {
   
   onSubmit(){
       //parasing code 
-     
+
       this.submitted = true;
       if (this.addWorkLoadForm.invalid) {
             return;
       }
-     
+
       const control2 = <FormArray>this.addWorkLoadForm.controls['keywordList'];
       control2.removeAt(0);
       var subjectStr  = this.addWorkLoadForm.get('subject').value;
       this.parsingStrings(subjectStr);
       var requestStr = this.addWorkLoadForm.get('case_request_detail').value;
-      this.parsingStrings(requestStr);	 
+      this.parsingStrings(requestStr);
 
       var product = this.addWorkLoadForm.get('product_line').value;
-      var item = this.formBuilder.group({ 
-            //word: [product] 
-            word: new FormControl(product),
-            id:   new FormControl(),
-            workloadId: new FormControl()
+      this.dictSet.add(product);
+      //var item = this.formBuilder.group({
+      //      word: new FormControl(product),
+      //      id:   new FormControl(),
+      //      workloadId: new FormControl()
+      //});
 
-      });
-      //item['word'].setValue(product);
       var newArr = Array.from(this.dictSet);
-      //console.log(newArr);
+
       for(let item of newArr)
       {
           if(!this.commonWordSet.has(item))
           {
-              //console.log(item);
               var temp = this.formBuilder.group({
                   word: new FormControl(item.toString()),
                   id:   new FormControl(),
                   workloadId: new FormControl()
-                  //word: [item]
               });
-              //temp['word'].setValue(item);
               control2.push(temp);
           }
       }
 
-      control2.push(item);
+      //control2.push(item);
 
       this.userService.createWorkload(this.addWorkLoadForm.value)
           .subscribe( data => {

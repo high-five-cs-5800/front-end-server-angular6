@@ -107,7 +107,14 @@ export class UserService {
 
   	getUserWorkloads(id: string){
     		return this.http.get<Workloads[]>(this.baseUrl + 'UserAccounts/' + id +'/workloadList', httpOptions);
-  	}
+ 	}
+
+
+    	getUserWorkloadsWithFilter(id: string){
+return this.http.get<Workloads[]>(this.baseUrl + 'UserAccounts/' + id +
+'/workloadList?filter=%7B%22where%22%3A%20%7B%22archieve%22%20%3A%20%22false%22%7D%7D', httpOptions);
+        }
+
   
 	deleteUserWorkload(id: string, workload: Workloads){
    		return this.http.delete(this.baseUrl + 'UserAccounts/' + id +'/workloadList/' + workload.id, httpOptions);

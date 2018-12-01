@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
                 login => {
                     this.userService.getUserById(login.userId)
                         .subscribe( data => {
-                          console.log(data);
                           sessionStorage.setItem('user_type', data.user_type.toString()); 
         		   if(data.user_type  == 2 ) {
                                 this.router.navigate(['admin-user']);
@@ -48,7 +47,6 @@ export class LoginComponent implements OnInit {
                       });
                 },
                 error => {
-
                     this.invalidLogin = true;
         });
  };

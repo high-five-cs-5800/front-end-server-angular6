@@ -24,7 +24,11 @@ export class EditWorkloadComponent implements OnInit {
     {value: 1, label: 'type 1'},
     {value: 2, label: 'type 2'}
   ];
- 
+
+  lists2 = [ 
+	{value: 'pre', label: 'pre'},
+	{value: 'post', label: 'post'}
+  ]; 
   editWorkLoadForm: FormGroup;
 
 
@@ -49,6 +53,7 @@ export class EditWorkloadComponent implements OnInit {
          archive: new FormControl,
          case_request_detail: new FormControl,
          userAccountId: new FormControl,
+	 help_response_detail: new FormControl,
          keywordList: new FormArray([
             this.initKeywordList()
          ]),
@@ -103,8 +108,6 @@ export class EditWorkloadComponent implements OnInit {
         });
   }
 
-
-
   initContact_info(){
        return this.formBuilder.group({
           First: ['', Validators.required],
@@ -114,14 +117,10 @@ export class EditWorkloadComponent implements OnInit {
           phone_number: ['', Validators.required]
        });
   }
+
   onSubmit(){
           this.userService.updateWorkload(this.editWorkLoadForm.value)
-                    .subscribe(
-                        data => {
-                        this.router.navigate(['list-workload']);
-                     }
-                    );
-
+                    .subscribe(data => { this.router.navigate(['list-workload']); });
   }
 
 }
