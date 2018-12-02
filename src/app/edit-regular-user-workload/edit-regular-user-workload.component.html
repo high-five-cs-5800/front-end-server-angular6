@@ -1,0 +1,381 @@
+<!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="../resource/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../resource/bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="../resource/bower_components/Ionicons/css/ionicons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../resource/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../resource/dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="../resource/dist/css/skins/_all-skins.min.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  
+  <div class="hold-transition skin-blue sidebar-mini" style="font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;">
+  	<div class="wrapper">
+
+  <header class="main-header">
+    <!-- Logo -->
+    <a [routerLink]="''" (click)="onManageWorkload()" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>High</b>Five</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>High</b>Five</span>
+    </a>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="http://www.computerfixerpro.com/highfive/regularuser.png" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>{{username}}</p>
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
+      <!-- search form -->
+      <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+      </form>
+      <!-- /.search form -->
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">MAIN NAVIGATION</li>
+        <li class="active treeview">
+          <a [routerLink]="''" (click)="onManageWorkload()">
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="''" (click)="onManageWorkload()">
+            <i class="fa fa-th"></i> <span>Manage Workload</span>
+          </a>
+	</li>
+         <li class="treeview">
+          <a [routerLink]="''" (click)="onSearch()">
+            <i class="fa fa-search"></i>
+            <span>Search</span>
+          </a>
+        </li>
+	<li>
+          <a [routerLink]="''" (click)="onLogout()">
+            <i class="fa fa-sign-out"></i> <span>Logout</span>
+          </a>
+	</li>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Workload
+        <small>Cases</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a [routerLink]="''" (click)="onManageWorkload()"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active"><a [routerLink]="''" (click)="onManageWorkload()">Workload</a></li>
+      </ol>
+    </section>
+<!-- Main content -->
+    <section class="content">
+      <div class="row">
+      <form [formGroup]="editWorkLoadForm" novalidate (ngSubmit)="onSubmit()">
+        <div class="col-md-6">
+
+          <div class="box box-danger">
+            <div class="box-header">
+              <h3 class="box-title">Case Information</h3>
+            </div>
+            <div class="box-body">
+		<div class="form-group" hidden>
+          		<label hidden>Id </label>
+          		<input type="text" class="form-control" formControlName="id" hidden>
+        	</div>
+        	<div class="form-group" hidden>
+          		<label hidden>Account Id </label>
+          		<input type="text" class="form-control" formControlName="userAccountId" hidden>
+        	</div>		
+              <!-- Case type -->
+              <div class="form-group">
+                <label for="case_type">Case Type:</label>
+                <select formControlName="case_type" class="form-control select2" id="case_type" [(ngModel)]="lists[1].value" style="width: 100%;">
+                  	<option *ngFor="let item of lists" value={{item.value}}>
+               			{{item.label}}
+             		</option>
+                </select>
+              </div>
+              <!-- Case purpose -->
+              <div class="form-group">
+                <label>Case Purpose:</label>
+                <select class="form-control select2" formControlName="case_purpose" [(ngModel)]="lists2[0].value" style="width: 100%;">
+                  	<option *ngFor="let item2 of lists2" value={{item2.value}}>
+                  		{{item2.label}}
+                 	</option>
+                </select>
+              </div>
+              <!-- /.form group -->
+
+              <!-- subject -->
+              <div class="form-group">
+                <label>Subject:</label>
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-paperclip"></i>
+                  </div>
+                  <input type="text" class="form-control" formControlName="subject">
+		  <small *ngIf="!editWorkLoadForm.controls.subject.valid" class="text-danger">Subject is required </small>
+                </div>
+                <!-- /.input group -->
+              </div>
+              <!-- /.form group -->
+              <!-- product line -->
+              <div class="form-group">
+                <label>Product Line:</label>
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-archive"></i>
+                  </div>
+                  <input type="text" class="form-control" formControlName="product_line">
+		  <small *ngIf="!editWorkLoadForm.controls.product_line.valid" class="text-danger">Product line is required </small>
+                </div>
+                <!-- /.input group -->
+              </div>
+              <!-- /.form group -->		
+	      <div class="form-group" hidden>
+          	<label hidden>Archive:</label>
+          	<input type='checkbox' formControlName='archive' hidden>
+              </div>
+              <div class="form-group">
+                  <label>Request Detail:</label>
+                  <textarea class="form-control" rows="3" formControlName="case_request_detail"></textarea>
+				 <small *ngIf="!editWorkLoadForm.controls.case_request_detail.valid" class="text-danger">case request detail is required </small>
+              </div>
+				
+	      <div class="form-group">
+                  <label>Response Detail</label>
+                  <textarea class="form-control" rows="3" formControlName="help_response_detail"></textarea>
+              </div>
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+	<div class="box box-info">
+            <div class="box-header">
+              <h3 class="box-title">Personal Information</h3>
+            </div>
+            <div class="box-body">
+              <fieldset formGroupName="contact_info">
+              <div class="form-group" hidden>
+                <label hidden>worklaod id</label>
+               <input type="text" class="form-control" formControlName="workloadId" hidden>
+              </div>
+              <div class="form-group" hidden>
+                <label hidden>id</label>
+               <input type="text" class="form-control" formControlName="id" hidden>
+              </div>
+              <!-- first name -->
+              <div class="form-group">
+                <label>First:</label>
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                  </div>
+                  <input type="text" class="form-control" formControlName="First" required>
+                </div>
+                <!-- /.input group -->
+              </div>
+              <!-- /.form group -->
+              <!-- last name -->
+              <div class="form-group">
+                <label>Last:</label>
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                  </div>
+                  <input type="text" class="form-control" formControlName="Last" required>
+                </div>
+                <!-- /.input group -->
+              </div>
+              <!-- /.form group -->
+
+              <!-- email -->
+              <div class="form-group">
+                <label>E-Mail:</label>
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-envelope"></i>
+                  </div>
+                  <input type="email" class="form-control" formControlName="email" required>
+                </div>
+                <!-- /.input group -->
+              </div>
+              <!-- /.form group -->
+              <!-- company name -->
+              <div class="form-group">
+                <label>Company Name:</label>
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-building"></i>
+                  </div>
+                  <input type="text" class="form-control" formControlName="company" required>
+                </div>
+                <!-- /.input group -->
+              </div>
+              <!-- /.form group -->
+	      <!-- phone mask -->
+              <div class="form-group">
+                <label>Phone Number:</label>
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-phone"></i>
+                  </div>
+                  <input type="text" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask formControlName="phone_number" required>
+                </div>
+                <!-- /.input group -->
+              </div>
+              <!-- /.form group -->
+              </fieldset>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+          
+        </div>
+        <!-- /.col (left) -->
+	    
+        <div class="col-md-6">
+          <div class="box box-primary">
+            <div class="box-header">
+              <h3 class="box-title">Keywords</h3>
+            </div>
+            <div class="box-body">
+              <!-- first name -->
+              <div class="form-group">
+                <!--keyword-->
+        <div formArrayName="keywordList">
+          <div *ngFor="let keyword of editWorkLoadForm.controls.keywordList['controls']; let i=index" class="panel panel-default">
+            <div>
+              <span>Keyword count: {{i + 1}}</span>
+              <a *ngIf="editWorkLoadForm.controls.keywordList.controls.length > 1" (click)="removeKeyword(i)"> Remove keyword - </a>
+            </div>
+			  <br>
+            <div [formGroupName]="i">
+				<div class="form-group">
+                <label>Keyword:</label>
+
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                  </div>
+                  <input class="form-control" formControlName="word">
+                </div>
+                <!-- /.input group -->
+              </div>
+              <div class="form-group col-xs-6" hidden>
+                <label hidden>id</label>
+                <input class="form-control" formControlName="id" hidden>
+              </div>
+              <div class="form-group col-xs-6" hidden>
+                <label hidden>workloadId</label>
+                <input class="form-control" formControlName="workloadId" hidden>
+              </div>
+              <div class="form-group col-xs-6">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <a (click)="addKeyword()" style="cursor: default">Add another keyword + </a>
+	</div>
+              </div>
+              <!-- /.form group -->
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col (right) -->
+		  <div style="float: right; margin-right: 15px;">
+		  <button type="submit" class="btn btn-primary pull-right" [disabled]="!editWorkLoadForm.valid">Submit</button>
+		  <button class="btn btn-primary pull-right" [routerLink]="'/manage-regular-user-workload'">Cancel</button>
+		  </div>
+			  </form>
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2018 High Five.</strong> All rights
+    reserved.
+  </footer>
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+  </div>
+ <!-- jQuery 3 -->
+
+
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
