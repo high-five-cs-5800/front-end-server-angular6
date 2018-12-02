@@ -15,8 +15,9 @@ import { AuthenticationService   } from "../service/auth.service";
 export class ListWorkloadComponent implements OnInit {
   workloads: Workloads[];
   constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService, private authService: AuthenticationService) { }
-
+  username = "";
   ngOnInit() {
+      this.username = sessionStorage.getValue('username');
       this.userService.getWorkloads()
       .subscribe( data => {
         this.workloads = data;
