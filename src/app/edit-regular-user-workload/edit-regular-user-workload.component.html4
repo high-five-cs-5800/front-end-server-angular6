@@ -1,3 +1,8 @@
+<style>
+.panel-default[_ngcontent-c4] {
+    border-color: white;
+}
+</style>
 <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="../resource/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
@@ -37,7 +42,7 @@
 
    <header class="main-header">
     <!-- Logo -->
-    <a [routerLink]="'/admin-user'" class="logo">
+    <a [routerLink]="'/regular-user'" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>High</b>Five</span>
       <!-- logo for regular state and mobile devices -->
@@ -54,7 +59,7 @@
           <img src="http://www.computerfixerpro.com/highfive/admin.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>{{username}}</p>
+          <p>{{ username}}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -63,7 +68,8 @@
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
           <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+			<i class="fa fa-search"></i>
                 </button>
               </span>
         </div>
@@ -73,7 +79,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li class="active treeview">
-          <a [routerLink]="'/admin-user'">
+          <a [routerLink]="''" (click)="onDashBoard()">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -81,21 +87,16 @@
           </a>
         </li>
         <li class="treeview">
-          <a [routerLink]="'/list-user'">
+          <a [routerLink]="''" (click)="onManageWorkload()">
             <i class="fa fa-user"></i>
-            <span>Manage User</span>
+            <span>Manage Case</span>
           </a>
         </li>
         <li>
-          <a [routerLink]="'/list-workload'">
-            <i class="fa fa-th"></i> <span>Manage Workload</span>
-          </a>
-		  </li>
-		  <li>
           <a [routerLink]="''" (click)="onLogout()">
             <i class="fa fa-sign-out"></i> <span>Logout</span>
           </a>
-		  </li>
+	</li>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -107,12 +108,12 @@
     <section class="content-header">
       <h1>
         Workload
-        <small>Add New Workload</small>
+        <small>Edit Workload</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a [routerLink]="'/admin-user'"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a [routerLink]="'/list-workload'">Workload</a></li>
-		  <li class="active"><a [routerLink]="'/add-workload'">>Add New Workload</a></li>
+        <li><a routerLink]="''" (click)="onDashBoard()"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a [routerLink]="''" (click)="onManageWorkload()">>Manage Case</a></li>
+		  <li class="active"><a [routerLink]="''">Edit Case</a></li>
       </ol>
     </section>
 
@@ -120,7 +121,7 @@
     <section class="content">
 
       <div class="row">
-		  <form [formGroup]="addWorkLoadForm" novalidate (ngSubmit)="onSubmit()">
+      <form [formGroup]="editWorkLoadForm" novalidate (ngSubmit)="onSubmit()">
         <div class="col-md-6">
 
           <div class="box box-danger">
@@ -128,29 +129,30 @@
               <h3 class="box-title">Case Information</h3>
             </div>
             <div class="box-body">
-				
-				<div class="form-group" hidden>
-          <label hidden>User Account</label>
-          <input type="text" class="form-control" formControlName="userAccountId" hidden>
-        </div>
+		<div class="form-group" hidden>
+          		<label hidden>Id </label>
+          		<input type="text" class="form-control" formControlName="id" hidden>
+        	</div>
+        	<div class="form-group" hidden>
+          		<label hidden>Account Id </label>
+          		<input type="text" class="form-control" formControlName="userAccountId" hidden>
+        	</div>		
               <!-- Case type -->
               <div class="form-group">
                 <label for="case_type">Case Type:</label>
                 <select formControlName="case_type" class="form-control select2" id="case_type" [(ngModel)]="lists[1].value" style="width: 100%;">
-                  <option *ngFor="let item of lists" value={{item.value}}>
-               {{item.label}}
-             </option>
+                  	<option *ngFor="let item of lists" value={{item.value}}>
+               			{{item.label}}
+             		</option>
                 </select>
               </div>
-              <!-- /.form group -->
-
               <!-- Case purpose -->
               <div class="form-group">
                 <label>Case Purpose:</label>
                 <select class="form-control select2" formControlName="case_purpose" [(ngModel)]="lists2[0].value" style="width: 100%;">
-                  <option *ngFor="let item2 of lists2" value={{item2.value}}>
-               {{item2.label}}
-             </option>
+                  	<option *ngFor="let item2 of lists2" value={{item2.value}}>
+                  		{{item2.label}}
+                 	</option>
                 </select>
               </div>
               <!-- /.form group -->
@@ -158,100 +160,63 @@
               <!-- subject -->
               <div class="form-group">
                 <label>Subject:</label>
-
                 <div class="input-group">
                   <div class="input-group-addon">
                     <i class="fa fa-paperclip"></i>
                   </div>
                   <input type="text" class="form-control" formControlName="subject">
-					<small *ngIf="!addWorkLoadForm.controls.subject.valid" class="text-danger">Subject is required </small>
+		  <small *ngIf="!editWorkLoadForm.controls.subject.valid" class="text-danger">Subject is required </small>
                 </div>
                 <!-- /.input group -->
               </div>
               <!-- /.form group -->
-
               <!-- product line -->
               <div class="form-group">
                 <label>Product Line:</label>
-
                 <div class="input-group">
                   <div class="input-group-addon">
                     <i class="fa fa-archive"></i>
                   </div>
-                  <input type="text" class="form-control"
-                         formControlName="product_line">
-					<small *ngIf="!addWorkLoadForm.controls.product_line.valid" class="text-danger">Product line is required </small>
+                  <input type="text" class="form-control" formControlName="product_line">
+		  <small *ngIf="!editWorkLoadForm.controls.product_line.valid" class="text-danger">Product line is required </small>
                 </div>
                 <!-- /.input group -->
               </div>
-              <!-- /.form group -->
-				
-				<div class="form-group" hidden>
-          <label hidden>Archive:</label>
-          <input type='checkbox' formControlName='archive' hidden>
-        </div>
-
-             <div class="form-group">
+              <!-- /.form group -->		
+	      <div class="form-group" hidden>
+          	<label hidden>Archive:</label>
+          	<input type='checkbox' formControlName='archive' hidden>
+              </div>
+              <div class="form-group">
                   <label>Request Detail:</label>
                   <textarea class="form-control" rows="3" formControlName="case_request_detail"></textarea>
-                </div>
-				
-				<div class="form-group" hidden>
-          <label hidden>Request Detail</label>
-          <textarea row="4" cols="50" formControlName="help_response_detail" class="form-control" hidden></textarea>
-        </div>
-
+	          <small *ngIf="!editWorkLoadForm.controls.case_request_detail.valid" class="text-danger">case request detail is required </small>
+              </div>		
+	      <div class="form-group">
+                  <label>Response Detail</label>
+                  <textarea class="form-control" rows="3" formControlName="help_response_detail"></textarea>
+              </div>
             </div>
             <!-- /.box-body -->
           </div>
-          <!-- /.box -->*
-
-        </div>
-        <!-- /.col (left) -->
-			  
-			<!--keyword-->
-
-        <div formArrayName="keywordList" hidden>
-          <div *ngFor="let keyword of addWorkLoadForm.controls.keywordList['controls']; let i=index" class="panel panel-default" hidden>
-            <div hidden>
-              <span hidden>Keyword count: {{i + 1}}</span>
-              <a *ngIf="addWorkLoadForm.controls.keywordList.controls.length > 1" (click)="removeKeyword(i)" hidden>Remove keyword </a>
-            </div>
-            <div hidden [formGroupName]="i">
-              <div class="form-group col-xs-6" hidden>
-                <label hideen>Keyword</label>
-                <input type="hidden" class="form-control" formControlName="word">
-              </div>
-              <div class="form-group col-xs-6" hidden>
-                <label hideen>id</label>
-                <input type="hidden" class="form-control" formControlName="id">
-              </div>
-              <div class="form-group col-xs-6" hidden>
-                <label hideen>Workload Id</label>
-                <input type="hidden" class="form-control" formControlName="workloadId">
-              </div>
-
-              <div class="form-group col-xs-6" hidden>
- 
-              </div>
-            </div>
-          </div>
-        </div>
-        <div hidden>
-          <a (click)="addKeyword()" style="cursor: default" hidden>Add another keyword + </a>
-        </div> 
-	    
-        <div class="col-md-6">
-          <div class="box box-primary">
+          <!-- /.box -->
+	<div class="box box-info">
             <div class="box-header">
               <h3 class="box-title">Personal Information</h3>
             </div>
             <div class="box-body">
+              <fieldset formGroupName="contact_info">
+              <div class="form-group" hidden>
+                <label hidden>worklaod id</label>
+               <input type="text" class="form-control" formControlName="workloadId" hidden>
+              </div>
+              <div class="form-group" hidden>
+                <label hidden>id</label>
+               <input type="text" class="form-control" formControlName="id" hidden>
+              </div>
               <!-- first name -->
-<fieldset formGroupName="contact_info">
               <div class="form-group">
                 <label>First:</label>
-
                 <div class="input-group">
                   <div class="input-group-addon">
                     <i class="fa fa-user"></i>
@@ -261,11 +226,9 @@
                 <!-- /.input group -->
               </div>
               <!-- /.form group -->
-
               <!-- last name -->
               <div class="form-group">
                 <label>Last:</label>
-
                 <div class="input-group">
                   <div class="input-group-addon">
                     <i class="fa fa-user"></i>
@@ -279,7 +242,6 @@
               <!-- email -->
               <div class="form-group">
                 <label>E-Mail:</label>
-
                 <div class="input-group">
                   <div class="input-group-addon">
                     <i class="fa fa-envelope"></i>
@@ -289,11 +251,9 @@
                 <!-- /.input group -->
               </div>
               <!-- /.form group -->
-
               <!-- company name -->
               <div class="form-group">
                 <label>Company Name:</label>
-
                 <div class="input-group">
                   <div class="input-group-addon">
                     <i class="fa fa-building"></i>
@@ -303,11 +263,9 @@
                 <!-- /.input group -->
               </div>
               <!-- /.form group -->
-				
-				<!-- phone mask -->
+	      <!-- phone mask -->
               <div class="form-group">
                 <label>Phone Number:</label>
-
                 <div class="input-group">
                   <div class="input-group-addon">
                     <i class="fa fa-phone"></i>
@@ -317,7 +275,62 @@
                 <!-- /.input group -->
               </div>
               <!-- /.form group -->
-</fieldset>
+              </fieldset>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+          
+        </div>
+        <!-- /.col (left) -->
+	    
+        <div class="col-md-6">
+          <div class="box box-primary">
+            <div class="box-header">
+              <h3 class="box-title">Keywords</h3>
+            </div>
+            <div class="box-body">
+              <!-- first name -->
+              <div class="form-group">
+                <!--keyword-->
+        <div formArrayName="keywordList">
+          <div *ngFor="let keyword of editWorkLoadForm.controls.keywordList['controls']; let i=index" class="panel panel-default">
+            <div>
+              <span>Keyword count: {{i + 1}}</span>
+              <a *ngIf="editWorkLoadForm.controls.keywordList.controls.length > 1" (click)="removeKeyword(i)"> Remove keyword - </a>
+            </div>
+	    <br>
+            <div [formGroupName]="i">
+	       <div class="form-group">
+                <label>Keyword:</label>
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                  </div>
+                  <input class="form-control" formControlName="word">
+                </div>
+                <!-- /.input group -->
+              </div>
+              <div class="form-group col-xs-6" hidden>
+                <label hidden>id</label>
+                <input class="form-control" formControlName="id" hidden>
+              </div>
+              <div class="form-group col-xs-6" hidden>
+                <label hidden>workloadId</label>
+                <input class="form-control" formControlName="workloadId" hidden>
+              </div>
+              <div class="form-group col-xs-6">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <a (click)="addKeyword()" style="cursor: default">Add another keyword + </a>
+	</div>
+              </div>
+              <!-- /.form group -->
+
             </div>
             <!-- /.box-body -->
           </div>
@@ -325,8 +338,8 @@
         </div>
         <!-- /.col (right) -->
 		  <div style="float: right; margin-right: 15px;">
-		  <button type="submit" class="btn btn-primary pull-right" [disabled]="!addWorkLoadForm.valid">Submit</button>
-		  <button class="btn btn-primary pull-right" [routerLink]="'/list-workload'">Cancel</button>
+		  <button type="submit" class="btn btn-primary pull-right" [disabled]="!editWorkLoadForm.valid">Submit</button>
+		  <button class="btn btn-primary pull-right" (click)="onManageWorkload()">Cancel</button>
 		  </div>
 			  </form>
       </div>
@@ -344,45 +357,47 @@
 	<!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../resource/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../resource/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Select2 -->
-<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
+<script src="../resource/bower_components/select2/dist/js/select2.full.min.js"></script>
 <!-- InputMask -->
-<script src="plugins/input-mask/jquery.inputmask.js"></script>
-<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-<script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<script src="../resource/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="../resource/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="../resource/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 <!-- date-range-picker -->
-<script src="bower_components/moment/min/moment.min.js"></script>
-<script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="../resource/bower_components/moment/min/moment.min.js"></script>
+<script src="../resource/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 <!-- bootstrap datepicker -->
-<script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="../resource/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- bootstrap color picker -->
-<script src="bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+<script src="../resource/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
 <!-- bootstrap time picker -->
-<script src="plugins/timepicker/bootstrap-timepicker.min.js"></script>
+<script src="..resource/plugins/timepicker/bootstrap-timepicker.min.js"></script>
 <!-- SlimScroll -->
-<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../resource/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- iCheck 1.0.1 -->
-<script src="plugins/iCheck/icheck.min.js"></script>
+<script src="../resource/plugins/iCheck/icheck.min.js"></script>
 <!-- FastClick -->
-<script src="bower_components/fastclick/lib/fastclick.js"></script>
+<script src="../resource/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+<script src="../resource/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+<script src="../resource/dist/js/demo.js"></script>
 <!-- Page script -->
 <script>
   $(function () {
     //Initialize Select2 Elements
     $('.select2').select2()
+
     //Datemask dd/mm/yyyy
     $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
     //Datemask2 mm/dd/yyyy
     $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
     //Money Euro
     $('[data-mask]').inputmask()
+
     //Date range picker
     $('#reservation').daterangepicker()
     //Date range picker with time picker
@@ -405,10 +420,12 @@
         $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
       }
     )
+
     //Date picker
     $('#datepicker').datepicker({
       autoclose: true
     })
+
     //iCheck for checkbox and radio inputs
     $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
       checkboxClass: 'icheckbox_minimal-blue',
@@ -424,10 +441,12 @@
       checkboxClass: 'icheckbox_flat-green',
       radioClass   : 'iradio_flat-green'
     })
+
     //Colorpicker
     $('.my-colorpicker1').colorpicker()
     //color picker with addon
     $('.my-colorpicker2').colorpicker()
+
     //Timepicker
     $('.timepicker').timepicker({
       showInputs: false

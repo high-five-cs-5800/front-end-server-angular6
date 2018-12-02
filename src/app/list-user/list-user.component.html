@@ -44,7 +44,7 @@
           <img src="http://www.computerfixerpro.com/highfive/admin.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Administrator</p>
+          <p>{{ username }}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -111,9 +111,6 @@
       <br>
       <br>
       <br>
-      <br>
-      <br>
-      <br>
       <div class="row">
         <div class="col-lg-3 col-xs-6" style="width: 33.3%;">
           <!-- small box -->
@@ -168,7 +165,7 @@
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th class="not-visible" style="text-align: center;">ID</th>
+                  <th class="not-visible" style="text-align: center; display: none;">ID</th>
                   <th style="text-align: center;">Username</th>
                   <th style="text-align: center;">Title</th>
                   <th style="text-align: center;">User Type</th>
@@ -178,7 +175,7 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let user of users">
-      <td class="not-visible">{{user.id}}</td>
+      <td class="not-visible" style="display: none;">{{user.id}}</td>
       <td> {{user.username}} </td>
       <td> {{user.title}} </td>
       <td> {{ user.user_type==0 ? 'client': user.user_type==1?'reg':'admin' }}  </td>
@@ -195,9 +192,6 @@
         <!-- /.col -->
       </div>
       <!-- /.row -->
-      <br>
-      <br>
-      <br>
       <br>
       <br>
       <br>

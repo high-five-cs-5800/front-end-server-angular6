@@ -14,7 +14,7 @@ import { RegularUserComponent} from "./regular-user/regular-user.component";
 import { ClientUserComponent } from "./client-user/client-user.component"; 
 
 
-import {{ ClientAddWorkloadComponent }} from "./client-add-workload/client-add-workload.component";
+import { ClientAddWorkloadComponent } from "./client-add-workload/client-add-workload.component";
 import { ManageRegularUserWorkloadComponent } from './manage-regular-user-workload/manage-regular-user-workload.component';
 import { EditRegularUserWorkloadComponent } from './edit-regular-user-workload/edit-regular-user-workload.component';
 import { SearchComponent } from './search/search.component';

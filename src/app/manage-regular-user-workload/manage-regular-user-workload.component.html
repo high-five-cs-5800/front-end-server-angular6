@@ -99,7 +99,7 @@
         Workload
         <small>Cases</small>
       </h1>
-		<ol class="breadcrumb">
+      <ol class="breadcrumb">
         <li><a [routerLink]="''" (click)="onManageWorkload()"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active"><a [routerLink]="''" (click)="onManageWorkload()">Workload</a></li>
       </ol>
@@ -108,45 +108,40 @@
     <!-- Main content -->
     <section class="content">
       <!-- Small boxes (Stat box) -->
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-		<div class="row">
+      <br><br><br><br><br><br>
+      <div class="row">
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Case Pool</h3>
-            </div>
+		<h3 class="box-title">Case Pool</h3>
+	    </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example2" class="table table-bordered table-hover">
+		<table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th class="not-visible" style="text-align: center;">ID</th>
+                  <th style="text-align: center;">ID</th>
                   <th style="text-align: center;">Case Type</th>
                   <th style="text-align: center;">Case Purpose</th>
-                  <th style="text-align: center;">Subject</th>
+                  <th style="text-align: center;">Subjecgt</th>
                   <th style="text-align: center;">Product Line</th>
-				  <th style="text-align: center;">Case Request Detail</th>
-				  <th style="text-align: center;" hidden>User Account</th>
-				  <th style="text-align: center;">Add to Workload</th>
+                  <th style="text-align: center;">Case Detail</th>
+                  <th style="text-align: center;">Case Response</th>
+                  <th style="text-align: center;" hidden>assigned to</th>
+	          <th style="text-align: center;">Add to Workload</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr *ngFor="let workload of workloadsPool">
-                  <td hidden> {{workload.id}}</td>
-      <td> {{workload.case_type}}</td>
-      <td> {{workload.case_purpose}}</td>
-      <td> {{workload.subject}}</td>
-      <td> {{workload.product_line}}</td>
-      <td> {{workload.case_request_detail}}</td>
-      <td hidden> {{workload.userAccountId}}<td>
-      <td>
-            <button class="btn btn-danger" (click)="addWorkload(workload)"> Add to your workload</button>
-      </td>
+		  <td> {{workload.id }}</td> 
+                  <td> {{workload.case_type}} </td>
+      		  <td> {{workload.case_purpose}} </td>
+      		  <td> {{workload.subject}}  </td>
+      		  <td> {{workload.product_line}}  </td>
+      		  <td> {{workload.case_request_detail}}  </td>
+      		  <td> {{workload.help_response_detail}}  </td>
+      		  <td hidden> {{workload.assigned_to_who}}  </td>
+		  <td><button class="btn btn-danger" (click)="addWorkload(workload)" style="margin-left: 20px;">Add</button></td>
                 </tr>
                 </tbody>
               </table>
@@ -157,56 +152,51 @@
           
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Your List of Cases</h3>
-            </div>
+		<h3 class="box-title">Your List of Cases</h3>
+	    </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example2" class="table table-bordered table-hover">
+		<table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th class="not-visible" style="text-align: center;">ID</th>
+                  <th style="text-align: center;">ID</th>
                   <th style="text-align: center;">Case Type</th>
                   <th style="text-align: center;">Case Purpose</th>
                   <th style="text-align: center;">Subject</th>
                   <th style="text-align: center;">Product Line</th>
-				  <th style="text-align: center;">Case Request Detail</th>
-				  <th style="text-align: center;" hidden>User Account</th>
-				  <th style="text-align: center;">Remove from Workload</th>
-               	  <th style="text-align: center;">Response</th>
+	     	  <th style="text-align: center;">Case Request Detail</th>
+		  <th style="text-align: center;">User Account</th>
+		  <th style="text-align: center;">Remove</th>
+		  <th style="text-align: center;">Response</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let workload2 of workloadsUsers">
-                  <td hidden> {{workload2.id}}</td>
-      <td> {{workload2.case_type}}</td>
-      <td> {{workload2.case_purpose}}</td>
-      <td> {{workload2.subject}}</td>
-      <td> {{workload2.product_line}}</td>
-      <td> {{workload2.case_request_detail}}</td>
-      <td hidden> {{workload2.userAccountId}}<td>
-      <td>
-            <button class="btn btn-danger" (click)="removeWorkload(workload2)"> Remove from your workload</button>
-      </td>
-               <td><button class="btn btn-danger" (click)="editWorkload(workload2)"> Response </button></td>
+                <tr *ngFor="let workload of workloadsUsers">
+                  	<td> {{workload.id}}</td>
+      			<td> {{workload.case_type}}</td>
+      			<td> {{workload.case_purpose}}</td>
+      			<td> {{workload.subject}}</td>
+      			<td> {{workload.product_line}}</td>
+      			<td> {{workload.case_request_detail}}</td>
+      			<td> {{workload.userAccountId}}<td>
+      			<td>
+            			<button class="btn btn-danger" (click)="removeWorkload(workload)">Remove Workload</button>
+      			</td>
+			<td>
+				<button class="btn btn-danger" (click)="editWorkload(workload)" style="margin-left: 20px;" >Response</button>
+			</td>
                 </tr>
                 </tbody>
               </table>
             </div>
             <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-          
+           </div>
+           <!-- /.box -->
         </div>
         <!-- /.col -->
       </div>
       <!-- /.row -->
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-
+      <br><br><br><br><br><br>
     </section>
     <!-- /.content -->
   </div>
@@ -222,6 +212,13 @@
 <!-- ./wrapper -->
   </div>
  <!-- jQuery 3 -->
+
+
+
+
+
+
+
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
