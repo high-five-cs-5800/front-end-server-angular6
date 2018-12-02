@@ -27,6 +27,7 @@ import { ManageRegularUserWorkloadComponent } from './manage-regular-user-worklo
 import { AngularDualListBoxModule } from 'angular-dual-listbox';
 import { EditRegularUserWorkloadComponent } from './edit-regular-user-workload/edit-regular-user-workload.component';
 import { SearchComponent } from './search/search.component';
+import { ClientAddWorkloadComponent } from './client-add-workload/client-add-workload.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { SearchComponent } from './search/search.component';
     ConfigComponent,
     ManageRegularUserWorkloadComponent,
     EditRegularUserWorkloadComponent,
-    SearchComponent
+    SearchComponent,
+    ClientAddWorkloadComponent
   ],
   imports: [
     BrowserModule,

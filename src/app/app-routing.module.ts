@@ -13,6 +13,8 @@ import { AdminUserComponent } from "./admin-user/admin-user.component";
 import { RegularUserComponent} from "./regular-user/regular-user.component"; 
 import { ClientUserComponent } from "./client-user/client-user.component"; 
 
+
+import {{ ClientAddWorkloadComponent }} from "./client-add-workload/client-add-workload.component";
 import { ManageRegularUserWorkloadComponent } from './manage-regular-user-workload/manage-regular-user-workload.component';
 import { EditRegularUserWorkloadComponent } from './edit-regular-user-workload/edit-regular-user-workload.component';
 import { SearchComponent } from './search/search.component';
@@ -32,6 +34,7 @@ const routes: Routes = [
   { path: 'admin-user',                   component: AdminUserComponent },
   { path: 'regular-user',                 component: RegularUserComponent },
   { path: 'client-user',                  component: ClientUserComponent },
+  { path: 'client-add-workload',          component: ClientAddWorkloadComponent },
 
   { path: 'manage-regular-user-workload', component: ManageRegularUserWorkloadComponent },
   { path: 'edit-regular-user-workload',   component: EditRegularUserWorkloadComponent },

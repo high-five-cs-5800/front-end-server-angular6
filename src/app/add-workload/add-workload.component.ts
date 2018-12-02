@@ -50,7 +50,7 @@ export class AddWorkloadComponent implements OnInit {
  
   addWorkLoadForm: FormGroup;
   username = "";
-
+  user_type;
   ngOnInit() {
     this.username = sessionStorage.getItem('username');
     this.addWorkLoadForm = new FormGroup(
@@ -78,6 +78,7 @@ export class AddWorkloadComponent implements OnInit {
     for(let i = 0; i < this.common.length; i++){
         this.commonWordSet.add(this.common[i]);
     }
+    this.user_type = sessionStorage.getItem('user_type');
 
   }
 
