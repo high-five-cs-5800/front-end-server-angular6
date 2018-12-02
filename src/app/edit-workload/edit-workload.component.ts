@@ -16,7 +16,7 @@ import { Workloads } from "../model/workload.model";
   styleUrls: ['./edit-workload.component.css']
 })
 export class EditWorkloadComponent implements OnInit {
-
+  username = "";
   constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthenticationService, private userService: UserService) { }
 
   lists = [
@@ -34,7 +34,7 @@ export class EditWorkloadComponent implements OnInit {
 
 
   ngOnInit() {
-
+   this.username = sessionStorage.getItem('username');
    let workloadId = sessionStorage.getItem("editWorkloadId");
    sessionStorage.removeItem("editWorkloadId");
    if(!workloadId){

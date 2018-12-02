@@ -20,7 +20,10 @@ export class ClientUserComponent implements OnInit {
     this.router.navigate(['login']);
   }
 
+  username="";
+
   ngOnInit() {
+    this.username = sessionStorage.getItem('username');
   }
 
 }

@@ -41,10 +41,10 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="http://www.computerfixerpro.com/highfive/admin.png" class="img-circle" alt="User Image">
+          <img src="http://www.computerfixerpro.com/highfive/regularuser.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Administrator</p>
+          <p> {{ username }}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -70,22 +70,22 @@
             </span>
           </a>
         </li>
-        <li class="treeview">
+        <li>
           <a [routerLink]="'/list-user'">
-            <i class="fa fa-user"></i>
-            <span>Manage User</span>
+            <i class="fa fa-th"></i> <span>Manage User</span>
+          </a>
+	</li>
+         <li class="treeview">
+          <a [routerLink]="'/list-workload'">
+            <i class="fa fa-search"></i>
+            <span>Manage Workload</span>
           </a>
         </li>
-        <li>
-          <a [routerLink]="'/list-workload'">
-            <i class="fa fa-th"></i> <span>Manage Workload</span>
-          </a>
-		  </li>
-		  <li>
+	<li>
           <a [routerLink]="''" (click)="onLogout()">
             <i class="fa fa-sign-out"></i> <span>Logout</span>
           </a>
-		  </li>
+	</li>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -94,16 +94,6 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Workload
-        <small>List</small>
-      </h1>
-		<ol class="breadcrumb">
-        <li><a [routerLink]="'/admin-user'"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><a [routerLink]="'/list-users'">Users</a></li>
-      </ol>
-    </section>
 
     <!-- Main content -->
     <section class="content">
@@ -114,86 +104,75 @@
       <br>
       <br>
       <br>
-      <div class="row">
-        <div class="col-lg-3 col-xs-6" style="width: 33.3%;">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h3>Dashboard</h3>
-            </div>
-            <div class="icon">
-              <i class="ion ion-ios-home"></i>
-			  </div>
-            <a [routerLink]="'/admin-user'" class="small-box-footer">Click here <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6" style="width: 33.3%;">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>Add User</h3>
-            </div>
-            <div class="icon">
-              <i class="ion ion-pin"></i>
-            </div>
-            <a (click)="addUser()" class="small-box-footer">Click here <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6" style="width: 33.3%;">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>Logout</h3>
-            </div>
-            <div class="icon">
-              <i class="ion ion-ios-clock"></i>
-            </div>
-            <a (click)="onLogout()" class="small-box-footer">Click here <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-      </div>
-      <!-- /.row -->
-		
 		<div class="row">
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Case Details</h3>
+              <h3 class="box-title">New User Account</h3>
             </div>
             <!-- /.box-header -->
+            <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
             <div class="box-body">
-              <table id="example2" class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th class="not-visible" style="text-align: center;">ID</th>
-                  <th style="text-align: center;">Username</th>
-                  <th style="text-align: center;">Title</th>
-                  <th style="text-align: center;">User Type</th>
-                  <th style="text-align: center;">Delete</th>
-                  <th style="text-align: center;">Edit</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let user of users">
-      <td class="not-visible">{{user.id}}</td>
-      <td> {{user.username}} </td>
-      <td> {{user.title}} </td>
-      <td> {{ user.user_type==0 ? 'client': user.user_type==1?'reg':'admin' }}  </td>
-					<td><button class="btn btn-danger" (click)="deleteUser(user)"> Delete</button></td>
-        <td><button class="btn btn-danger" (click)="editUser(user)" style="margin-left: 20px;"> Edit</button></td>
-    </tr>
-                </tbody>
-              </table>
+              <div class="form-group">
+                <label for="UserName">Username:</label>
+
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                  </div>
+      <input type="text" formControlName="username" class="form-control" id="Username" >
+      <div *ngIf="submitted  && f.username.errors" class="invalid-feedback">
+           <div *ngIf="f.username.errors.required">username is required</div>
+      </div>
+                </div>
+                <!-- /.input group -->
+              </div>
+              
+              <div class="form-group">
+                <label for="password">Password:</label>
+
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                  </div>
+      <input type="password" formControlName="password" class="form-control" id="Password" >
+      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+           <div *ngIf="f.password.errors.required">password is required</div>
+      </div>
+                </div>
+                <!-- /.input group -->
+              </div>
+              
+              <div class="form-group">
+                <label for="title">Title:</label>
+
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                  </div>
+      <input type="title" formControlName="title" class="form-control" id="Title">
+      <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+           <div *ngIf="f.title.errors.required">title is required</div>
+      </div>
+                </div>
+                <!-- /.input group -->
+              </div>
+              
+              <div class="form-group">
+                <label for="user_type">User Type</label>
+                <select formControlName="user_type" class="form-control select2" id="user_type" [(ngModel)]="lists[1].value" style="width: 100%;">
+                  <option *ngFor="let item of lists" value={{item.value}}>
+        	{{item.label}}
+      	</option>
+                </select>
+              </div>
+              
+              <button class="btn btn-success">Update</button>
             </div>
             <!-- /.box-body -->
-          </div>
           <!-- /.box -->
-        </div>
+          
         <!-- /.col -->
-      </div>
       <!-- /.row -->
       <br>
       <br>
@@ -202,35 +181,28 @@
       <br>
       <br>
 
-    </section>
     <!-- /.content -->
-  </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <strong>Copyright &copy; 2018 High Five.</strong> All rights
     reserved.
   </footer>
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
 <!-- ./wrapper -->
-  </div>
  <!-- jQuery 3 -->
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../resource/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../resource/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- DataTables -->
-<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="../resource/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../resource/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- SlimScroll -->
-<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- script src="../resource/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="bower_components/fastclick/lib/fastclick.js"></script>
+<script src="../resource/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+<!-- script src="../resource/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+<!-- script src="../resource/dist/js/demo.js"></script>
 <!-- page script -->
 <script>
   $(function () {

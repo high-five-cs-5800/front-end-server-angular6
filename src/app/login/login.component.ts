@@ -36,7 +36,8 @@ export class LoginComponent implements OnInit {
                 login => {
                     this.userService.getUserById(login.userId)
                         .subscribe( data => {
-                          sessionStorage.setItem('user_type', data.user_type.toString()); 
+                          sessionStorage.setItem('user_type', data.user_type.toString());
+			  sessionStorage.setItem('username', data.username.toString()); 
         		   if(data.user_type  == 2 ) {
                                 this.router.navigate(['admin-user']);
                            }else if(data.user_type  == 1 ) {

@@ -17,7 +17,10 @@ export class ListUserComponent implements OnInit {
   users: User[];
   constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService, private authService: AuthenticationService) { }
 
+  username = "";
+
   ngOnInit() {
+    this.username = sessionStorage.getItem('username');
     this.userService.getUsers()
       .subscribe( data => {
         this.users = data;

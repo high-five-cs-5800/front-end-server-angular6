@@ -8,7 +8,7 @@ import { Router } from "@angular/router";
   styleUrls: ['./admin-user.component.css']
 })
 export class AdminUserComponent implements OnInit {
-
+  username = "";
   constructor(private authService: AuthenticationService, private router: Router) { }
 
   onLogout(){
@@ -16,7 +16,7 @@ export class AdminUserComponent implements OnInit {
     this.router.navigate(['login']);
   }
   ngOnInit() {
-
+ 	this.username = sessionStorage.getItem('username');
   }
 
 }

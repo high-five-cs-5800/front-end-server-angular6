@@ -26,7 +26,9 @@ export class AddUserComponent implements OnInit {
   ];
   user: User;
   addForm: FormGroup;
+  username = "";
   ngOnInit() {
+    this.username = sessionStorage.getItem('username');
     this.addForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],      

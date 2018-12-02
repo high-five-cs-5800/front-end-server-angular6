@@ -23,14 +23,16 @@ export class ManageRegularUserWorkloadComponent implements OnInit {
   workloadsData = new Array<Workloads>();
   workloadsArray = new Array<Workloads>();
   userId: string;
+  username = "";
   constructor(private authService: AuthenticationService, private router: Router, private userService: UserService) { }
 
   onLogout(){
     this.authService.logout();
     this.router.navigate(['login']);
-  };
+  };;
 
   ngOnInit() {
+    this.username = sessionStorage.getItem('username');
     let currentUser = sessionStorage.getItem('currentUser');
     JSON.parse(currentUser, (key,value)=>{
     	if(key === 'userId')

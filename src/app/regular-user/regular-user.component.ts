@@ -11,10 +11,11 @@ import { Router } from "@angular/router";
   styleUrls: ['./regular-user.component.css']
 })
 export class RegularUserComponent implements OnInit {
-
+  username = "";
   constructor(private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
+    this.username = sessionStorage.getItem('username');
   }
 
   onLogout(){

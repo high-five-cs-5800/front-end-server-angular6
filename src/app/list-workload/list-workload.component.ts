@@ -17,7 +17,7 @@ export class ListWorkloadComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService, private authService: AuthenticationService) { }
   username = "";
   ngOnInit() {
-      this.username = sessionStorage.getValue('username');
+      this.username = sessionStorage.getItem('username');
       this.userService.getWorkloads()
       .subscribe( data => {
         this.workloads = data;

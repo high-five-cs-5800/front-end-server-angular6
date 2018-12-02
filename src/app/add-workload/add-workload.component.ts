@@ -49,8 +49,10 @@ export class AddWorkloadComponent implements OnInit {
   dictSet = new Set();
  
   addWorkLoadForm: FormGroup;
+  username = "";
 
   ngOnInit() {
+    this.username = sessionStorage.getItem('username');
     this.addWorkLoadForm = new FormGroup(
       {
          userAccountId: new FormControl(),

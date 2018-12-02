@@ -31,7 +31,10 @@ export class EditRegularUserWorkloadComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthenticationService, private userService: UserService) { }
 
+  username = "";
+
   ngOnInit() {
+     this.username = sessionStorage.getItem('username');
      let workloadId = sessionStorage.getItem("editWorkloadId");
      sessionStorage.removeItem("editWorkloadId");
      if(!workloadId){

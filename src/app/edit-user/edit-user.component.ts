@@ -24,8 +24,11 @@ export class EditUserComponent implements OnInit {
   //userTemp: User;
   editForm: FormGroup;
   constructor(private formBuilder: FormBuilder,private router: Router, private userService: UserService, private authService: AuthenticationService) { }
+
+  username = "";
  
   ngOnInit() {
+    this.username = sessionStorage.getItem('username');
     let userId = sessionStorage.getItem("editUserId");
     if(!userId) {
       alert("Invalid action.")

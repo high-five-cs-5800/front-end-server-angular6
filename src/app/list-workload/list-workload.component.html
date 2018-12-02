@@ -1,16 +1,16 @@
 <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../resource/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../resource/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="../resource/bower_components/Ionicons/css/ionicons.min.css">
   <!-- DataTables -->
-  <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="../resource/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="../resource/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="../resource/dist/css/skins/_all-skins.min.css"> 
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -171,12 +171,13 @@
                   <th style="text-align: center;">ID</th>
                   <th style="text-align: center;">Case Type</th>
                   <th style="text-align: center;">Case Purpose</th>
+                  <th style="text-align: center;">Subjecgt</th>
                   <th style="text-align: center;">Product Line</th>
                   <th style="text-align: center;">Case Detail</th>
-				  <th style="text-align: center;">Case Response</th>
-				  <th style="text-align: center;">Assigned To</th>
-				  <th style="text-align: center;">Delete</th>
-				  <th style="text-align: center;">Edit</th>
+                  <th style="text-align: center;">Case Response</th>
+                  <th style="text-align: center;" hidden>assigned to</th>
+	          <th style="text-align: center;">Delete</th>
+	          <th style="text-align: center;">Edit</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -188,9 +189,9 @@
       		  <td> {{workload.product_line}}  </td>
       		  <td> {{workload.case_request_detail}}  </td>
       		  <td> {{workload.help_response_detail}}  </td>
-      		  <td> {{workload.assigned_to_who}}  </td>
-					<td><button class="btn btn-danger" (click)="deleteWorkload(workload)"> Delete</button></td>
-					<td><button class="btn btn-danger" (click)="editWorkload(workload)" style="margin-left: 20px;"> Edit</button></td>
+      		  <td hidden> {{workload.assigned_to_who}}  </td>
+		  <td><button class="btn btn-danger" (click)="deleteWorkload(workload)"> Delete</button></td>
+		  <td><button class="btn btn-danger" (click)="editWorkload(workload)" style="margin-left: 20px;"> Edit</button></td>
                 </tr>
                 </tbody>
               </table>

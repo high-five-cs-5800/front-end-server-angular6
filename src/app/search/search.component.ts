@@ -15,7 +15,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-
+  username = "";
   keywordPool: Keyword[];
   workloadSingle: Workloads;
   workloadPool: Workloads[];
@@ -46,6 +46,7 @@ export class SearchComponent implements OnInit {
   onLogout(){
     this.authService.logout();
     this.router.navigate(['login']);
+    this.username = sessionStorage.getItem('username');
   };
 
   ngOnInit() {

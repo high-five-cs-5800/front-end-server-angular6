@@ -4,28 +4,28 @@
 }
 </style>
 <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../resource/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../resource/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="../resource/bower_components/Ionicons/css/ionicons.min.css">
   <!-- daterange picker -->
-  <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" href="../resource/bower_components/bootstrap-daterangepicker/daterangepicker.css">
   <!-- bootstrap datepicker -->
-  <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+  <link rel="stylesheet" href="../resource/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!-- iCheck for checkboxes and radio inputs -->
-  <link rel="stylesheet" href="plugins/iCheck/all.css">
+  <link rel="stylesheet" href="../resource/plugins/iCheck/all.css">
   <!-- Bootstrap Color Picker -->
-  <link rel="stylesheet" href="bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
+  <link rel="stylesheet" href="../resource/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
   <!-- Bootstrap time Picker -->
-  <link rel="stylesheet" href="plugins/timepicker/bootstrap-timepicker.min.css">
+  <link rel="stylesheet" href="../resource/plugins/timepicker/bootstrap-timepicker.min.css">
   <!-- Select2 -->
-  <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
+  <link rel="stylesheet" href="../resource/bower_components/select2/dist/css/select2.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="../resource/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="../resource/dist/css/skins/_all-skins.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -59,7 +59,7 @@
           <img src="http://www.computerfixerpro.com/highfive/admin.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Administrator</p>
+          <p>{{ username}}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -95,12 +95,12 @@
           <a [routerLink]="'/list-workload'">
             <i class="fa fa-th"></i> <span>Manage Workload</span>
           </a>
-		  </li>
-		  <li>
+        </li>
+        <li>
           <a [routerLink]="''" (click)="onLogout()">
             <i class="fa fa-sign-out"></i> <span>Logout</span>
           </a>
-		  </li>
+	</li>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -125,7 +125,7 @@
     <section class="content">
 
       <div class="row">
-		 <form [formGroup]="editWorkLoadForm" novalidate (ngSubmit)="onSubmit()">
+      <form [formGroup]="editWorkLoadForm" novalidate (ngSubmit)="onSubmit()">
         <div class="col-md-6">
 
           <div class="box box-danger">
@@ -133,34 +133,30 @@
               <h3 class="box-title">Case Information</h3>
             </div>
             <div class="box-body">
-				
-				<div class="form-group" hidden>
-          <label hidden>Id </label>
-          <input type="text" class="form-control" formControlName="id" hidden>
-        </div>
-        <div class="form-group" hidden>
-          <label hidden>Account Id </label>
-          <input type="text" class="form-control" formControlName="userAccountId" hidden>
-        </div>
-				
+		<div class="form-group" hidden>
+          		<label hidden>Id </label>
+          		<input type="text" class="form-control" formControlName="id" hidden>
+        	</div>
+        	<div class="form-group" hidden>
+          		<label hidden>Account Id </label>
+          		<input type="text" class="form-control" formControlName="userAccountId" hidden>
+        	</div>		
               <!-- Case type -->
               <div class="form-group">
                 <label for="case_type">Case Type:</label>
                 <select formControlName="case_type" class="form-control select2" id="case_type" [(ngModel)]="lists[1].value" style="width: 100%;">
-                  <option *ngFor="let item of lists" value={{item.value}}>
-               {{item.label}}
-             </option>
+                  	<option *ngFor="let item of lists" value={{item.value}}>
+               			{{item.label}}
+             		</option>
                 </select>
               </div>
-              <!-- /.form group -->
-
               <!-- Case purpose -->
               <div class="form-group">
                 <label>Case Purpose:</label>
                 <select class="form-control select2" formControlName="case_purpose" [(ngModel)]="lists2[0].value" style="width: 100%;">
-                  <option *ngFor="let item2 of lists2" value={{item2.value}}>
-               {{item2.label}}
-             </option>
+                  	<option *ngFor="let item2 of lists2" value={{item2.value}}>
+                  		{{item2.label}}
+                 	</option>
                 </select>
               </div>
               <!-- /.form group -->
@@ -168,64 +164,65 @@
               <!-- subject -->
               <div class="form-group">
                 <label>Subject:</label>
-
                 <div class="input-group">
                   <div class="input-group-addon">
                     <i class="fa fa-paperclip"></i>
                   </div>
                   <input type="text" class="form-control" formControlName="subject">
-					<small *ngIf="!editWorkLoadForm.controls.subject.valid" class="text-danger">Subject is required </small>
+		  <small *ngIf="!editWorkLoadForm.controls.subject.valid" class="text-danger">Subject is required </small>
                 </div>
                 <!-- /.input group -->
               </div>
               <!-- /.form group -->
-
               <!-- product line -->
               <div class="form-group">
                 <label>Product Line:</label>
-
                 <div class="input-group">
                   <div class="input-group-addon">
                     <i class="fa fa-archive"></i>
                   </div>
-                  <input type="text" class="form-control"
-                         formControlName="product_line">
-					<small *ngIf="!editWorkLoadForm.controls.product_line.valid" class="text-danger">Product line is required </small>
+                  <input type="text" class="form-control" formControlName="product_line">
+		  <small *ngIf="!editWorkLoadForm.controls.product_line.valid" class="text-danger">Product line is required </small>
                 </div>
                 <!-- /.input group -->
               </div>
-              <!-- /.form group -->
-				
-				<div class="form-group" hidden>
-          <label hidden>Archive:</label>
-          <input type='checkbox' formControlName='archive' hidden>
-        </div>
-
-             <div class="form-group">
+              <!-- /.form group -->		
+	      <div class="form-group" hidden>
+          	<label hidden>Archive:</label>
+          	<input type='checkbox' formControlName='archive' hidden>
+              </div>
+              <div class="form-group">
                   <label>Request Detail:</label>
                   <textarea class="form-control" rows="3" formControlName="case_request_detail"></textarea>
 				 <small *ngIf="!editWorkLoadForm.controls.case_request_detail.valid" class="text-danger">case request detail is required </small>
-                </div>
+              </div>
 				
-				<div class="form-group">
+	      <div class="form-group">
                   <label>Response Detail</label>
                   <textarea class="form-control" rows="3" formControlName="help_response_detail"></textarea>
-                </div>
+              </div>
 
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
-			
-			<div class="box box-info">
+	<div class="box box-info">
             <div class="box-header">
               <h3 class="box-title">Personal Information</h3>
             </div>
             <div class="box-body">
+              <fieldset formGroupName="contact_info">
+              <div class="form-group" hidden>
+                <label hidden>worklaod id</label>
+               <input type="text" class="form-control" formControlName="workloadId" hidden>
+              </div>
+              <div class="form-group" hidden>
+                <label hidden>id</label>
+               <input type="text" class="form-control" formControlName="id" hidden>
+              </div>
               <!-- first name -->
               <div class="form-group">
                 <label>First:</label>
-
                 <div class="input-group">
                   <div class="input-group-addon">
                     <i class="fa fa-user"></i>
@@ -235,11 +232,9 @@
                 <!-- /.input group -->
               </div>
               <!-- /.form group -->
-
               <!-- last name -->
               <div class="form-group">
                 <label>Last:</label>
-
                 <div class="input-group">
                   <div class="input-group-addon">
                     <i class="fa fa-user"></i>
@@ -253,7 +248,6 @@
               <!-- email -->
               <div class="form-group">
                 <label>E-Mail:</label>
-
                 <div class="input-group">
                   <div class="input-group-addon">
                     <i class="fa fa-envelope"></i>
@@ -263,11 +257,9 @@
                 <!-- /.input group -->
               </div>
               <!-- /.form group -->
-
               <!-- company name -->
               <div class="form-group">
                 <label>Company Name:</label>
-
                 <div class="input-group">
                   <div class="input-group-addon">
                     <i class="fa fa-building"></i>
@@ -277,11 +269,9 @@
                 <!-- /.input group -->
               </div>
               <!-- /.form group -->
-				
-				<!-- phone mask -->
+	      <!-- phone mask -->
               <div class="form-group">
                 <label>Phone Number:</label>
-
                 <div class="input-group">
                   <div class="input-group-addon">
                     <i class="fa fa-phone"></i>
@@ -291,11 +281,12 @@
                 <!-- /.input group -->
               </div>
               <!-- /.form group -->
+              </fieldset>
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
-
+          
         </div>
         <!-- /.col (left) -->
 	    
@@ -373,34 +364,34 @@
 	<!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../resource/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../resource/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Select2 -->
-<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
+<script src="../resource/bower_components/select2/dist/js/select2.full.min.js"></script>
 <!-- InputMask -->
-<script src="plugins/input-mask/jquery.inputmask.js"></script>
-<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-<script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<script src="../resource/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="../resource/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="../resource/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 <!-- date-range-picker -->
-<script src="bower_components/moment/min/moment.min.js"></script>
-<script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="../resource/bower_components/moment/min/moment.min.js"></script>
+<script src="../resource/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 <!-- bootstrap datepicker -->
-<script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="../resource/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- bootstrap color picker -->
-<script src="bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+<script src="../resource/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
 <!-- bootstrap time picker -->
-<script src="plugins/timepicker/bootstrap-timepicker.min.js"></script>
+<script src="..resource/plugins/timepicker/bootstrap-timepicker.min.js"></script>
 <!-- SlimScroll -->
-<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../resource/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- iCheck 1.0.1 -->
-<script src="plugins/iCheck/icheck.min.js"></script>
+<script src="../resource/plugins/iCheck/icheck.min.js"></script>
 <!-- FastClick -->
-<script src="bower_components/fastclick/lib/fastclick.js"></script>
+<script src="../resource/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+<script src="../resource/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+<script src="../resource/dist/js/demo.js"></script>
 <!-- Page script -->
 <script>
   $(function () {
