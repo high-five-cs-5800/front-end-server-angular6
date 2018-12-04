@@ -109,6 +109,7 @@ export class SearchComponent implements OnInit {
                 if(!this.commonWordSet.has(SubSetTwo[i]))
                 {
                         this.dictSet.add(SubSetTwo[i]);
+			this.commonWordSet.add(SubSetTwo[i]);
                 }
         }
   }

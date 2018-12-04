@@ -40,13 +40,16 @@ export class ManageRegularUserWorkloadComponent implements OnInit {
     });
     this.userService.getWorkloadsWithNoId()
         .subscribe( data => {
-           this.workloadsPool = data;
+           this.workloadsData = data;
+	   this.filterArchive();
         });
     this.userService.getUserWorkloads(this.userId)
         .subscribe( data => {
-           this.workloadsUsers = data;
+           //this.workloadsUsers = data;
            this.workloadsData = data;
-        //this.filterArchive();
+	   //console.log(data);
+           //console.log(this.workloadsData);
+           this.filterArchive2();
         });
 
 
@@ -91,7 +94,7 @@ export class ManageRegularUserWorkloadComponent implements OnInit {
 				                  	this.userService.getWorkloadsWithNoId().subscribe( data => 
 								{ this.workloadsPool = data; }); 
 				                  	this.userService.getUserWorkloads(this.userId).subscribe( data => 
-								{ this.workloadsUsers = data; });
+								{ this.workloadsData = data; this.filterArchive2()});
 				                  	this.router.navigate(['manage-regular-user-workload']);
                                                   })
                                                   })
@@ -125,7 +128,10 @@ export class ManageRegularUserWorkloadComponent implements OnInit {
                                         	                this.userService.getWorkloadsWithNoId().subscribe( data => { this.workloadsPool = data; });
                                                 	        this.userService.getUserWorkloads(
 									this.userId).subscribe( 
-										data => { this.workloadsUsers = data; });
+										data => { 
+											//this.workloadsUsers = data; 
+											   this.workloadsData = data; this.filterArchive2();
+											});
                                                         	this.router.navigate(['manage-regular-user-workload']);
                                                   	})
                                         	})
@@ -148,19 +154,35 @@ export class ManageRegularUserWorkloadComponent implements OnInit {
    }
 
   filterArchive(): void{
-   console.log(this.workloadsData.length);
-   for(let i = 0; i < this.workloadsData.length; i++)
-   {
-     //console.log(this.workloadsData[i]);
-     if(this.workloadsData[i].archive == null)
-     { 
-	//console.log(this.workloadsData[i]);
-	this.workloadsArray.push(this.workloadsData[i]);
-     }
+  	console.log(this.workloadsData.length);
+   	for(let i = 0; i < this.workloadsData.length; i++)
+   	{
+     		//console.log(this.workloadsData[i]);
+     		if(!this.workloadsData[i].archive)
+     		{ 
+			//console.log(this.workloadsData[i]);
+			this.workloadsArray.push(this.workloadsData[i]);
+     	}
    }
-   //this.workloadsPool = this.workloadsArray;
-   //console.log(this.workloadsPool);
- }
+   this.workloadsPool = this.workloadsArray;
+   this.workloadsArray = new Array<Workloads>();
+   console.log(this.workloadsPool);
+  }
+
+  filterArchive2(): void{
+        for(let i = 0; i < this.workloadsData.length; i++)
+        {
+                if(!this.workloadsData[i].archive)
+                { 
+                        this.workloadsArray.push(this.workloadsData[i]);
+        }
+   }
+   this.workloadsUsers = this.workloadsArray;
+   this.workloadsArray = new Array<Workloads>();
+  }
+
+
+
 
 }
 

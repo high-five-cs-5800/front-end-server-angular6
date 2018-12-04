@@ -138,11 +138,6 @@ export class AddWorkloadComponent implements OnInit {
 
       var product = this.addWorkLoadForm.get('product_line').value;
       this.dictSet.add(product);
-      //var item = this.formBuilder.group({
-      //      word: new FormControl(product),
-      //      id:   new FormControl(),
-      //      workloadId: new FormControl()
-      //});
 
       var newArr = Array.from(this.dictSet);
 
@@ -179,7 +174,7 @@ export class AddWorkloadComponent implements OnInit {
 
  parsingStrings(SubsString: String): void{
  	var SubSetOne = SubsString.toLowerCase();
-  	var SubSetTwo = SubSetOne.split(/[\s,".]+/);
+  	var SubSetTwo = SubSetOne.split(/[\s,".:]+/);
 
  	for(let i = 0; i < SubSetTwo.length; i++)
  	{
