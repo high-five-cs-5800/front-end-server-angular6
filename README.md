@@ -1,5 +1,5 @@
 ## Highfive help desk
-A web application to assist IT technicians to document previous resolved problems. It is common for technicians to handle similar problems from different customers. The process resolve these problems can be tedious but repetitive. Our application aims to help technicians find solutions quicker but providing an archive of previous resolved problems implemented with a search function to locate them.
+A web application to assist IT technicians to document previous resolved problems. It is common for technicians to handle similar problems from different customers. The process to resolve these problems can be tedious but repetitive. Our application aims to help technicians find solutions quicker by providing an archive of previous resolved problems implemented with a search function to locate them.
 
 The design consists of 3 modules of users, each user is granted unique features.
 
