@@ -1,3 +1,17 @@
+## Highfive help desk
+A web application to assist IT technicians to document previous resolved problems. It is common for technicians to handle similar problems from different customers. The process resolve these problems can be tedious but repetitive. Our application aims to help technicians find solutions quicker but providing an archive of previous resolved problems implemented with a search function to locate them.
+
+The design consists of 3 modules of users, each user is granted unique features.
+
+Admin: handles administration, updating of user information, and manages workload configuration
+
+Client: able to create requests of workloads for technician to handle
+
+User/IT technician: choose from list of workloads to handle and resolve. Able to reply to client about resolution of workload. Able to search keywords from archived workloads for similar problems
+
+Workload: an entity within the database model. A workload is requested by a client
+
+
 # FrontEndAgular6Express3
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.1.
@@ -21,7 +35,4 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
