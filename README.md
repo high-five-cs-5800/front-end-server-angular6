@@ -1,4 +1,4 @@
-## Highfive help desk
+# Highfive help desk
 A web application to assist IT technicians to document previous resolved problems. It is common for technicians to handle similar problems from different customers. The process to resolve these problems can be tedious but repetitive. Our application aims to help technicians find solutions quicker by providing an archive of previous resolved problems implemented with a search function to locate them.
 
 The design consists of 3 modules of users, each user is granted unique features.
@@ -11,8 +11,9 @@ User/IT technician: choose from list of workloads to handle and resolve. Able to
 
 Workload: an entity within the database model. A workload is requested by a client
 
+Note: Frontend developed with angular6, backend using LoopBackAPI and MongoDB
 
-# FrontEndAgular6Express3
+## FrontEndAgular6Express3
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.1.
 
